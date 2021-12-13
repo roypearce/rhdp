@@ -1,0 +1,24 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - !main
+  pull_request:
+    branches:
+      - !main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup
+        run: yarn install
+      - name: Creates static storybook test site
+        run: yarn run storybook:build
+      - name: Unit tests
+        run: yarn run test:unit
+      - name: E2E tests
+        run: yarn run test:e2e-headless
