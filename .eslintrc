@@ -1,0 +1,47 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "files": ["**/*.ts*"],
+  "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint"],
+  "rules": {
+    "eqeqeq": "error",
+    "no-console": "warn",
+    "no-fallthrough": "off",
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "prettier/prettier": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "react/prop-types": 0,
+    "sort-keys": 2,
+    "sort-imports": [
+      2,
+      {
+        "allowSeparatedGroups": false,
+        "ignoreCase": false,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": true,
+        "memberSyntaxSortOrder": ["all", "multiple", "single", "none"]
+      }
+    ]
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "ignorePatterns": ["node_modules", "build", "dist", "public"],
+  "settings": { "react": { "version": "detect" } }
+}

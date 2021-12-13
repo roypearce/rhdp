@@ -1,0 +1,71 @@
+{
+  "name": "rhdp",
+  "version": "1.0.0",
+  "description": "RHDP - React Hook Datepicker. A React Hook based primitive to build simple, flexible datepicker components that are WAI-ARIA compliant, and support localization.",
+  "author": "Roy Pearce <rhdp@roypearce.us> (github.com/roypearce)",
+  "repository": "git@github.com:roypearce/rhdp.git",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "hook",
+    "hooks",
+    "datepicker",
+    "date picker",
+    "calendar"
+  ],
+  "private": false,
+  "engineStrict": true,
+  "engines": {
+    "node": ">=12"
+  },
+  "main": "dist/main.js",
+  "module": "dist/module.js",
+  "typings": "dist/declarations/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c && yarn run tsc",
+    "storybook": "start-storybook -p 6006",
+    "storybook:build": "build-storybook",
+    "test:e2e": "npx cypress open",
+    "test:e2e-headless": "npx cypress run",
+    "test:unit": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addons": "^6.4.9",
+    "@storybook/react": "^6.4.9",
+    "@storybook/theming": "^6.4.9",
+    "@types/jest": "^27.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "babel-loader": "^8.2.3",
+    "cypress": "^9.1.0",
+    "cypress-real-events": "^1.5.1",
+    "eslint": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "jest": "^27.4.3",
+    "prettier": "^2.4.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rollup": "^2.61.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "storybook": "^6.4.9",
+    "storybook-react": "^3.2.16",
+    "ts-jest": "^27.0.7",
+    "typescript": "^4.5.2"
+  },
+  "peerDependencies": {
+    "react": ">=16.12.0"
+  }
+}

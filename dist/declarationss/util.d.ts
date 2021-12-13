@@ -1,0 +1,34 @@
+import { DisplayDaysOfTheWeek, SelectedDates, WeekStart } from './types';
+import { ChainDateType, TimePeriod } from './chain-date';
+export declare const capitalize: (str: string) => string;
+export declare const convertToStringArray: (maybeArray: SelectedDates) => string[];
+export declare const formatDayOfTheWeek: (locale: string, date: Date, format: 'long' | 'short' | 'narrow' | undefined) => string;
+export declare const getDaysOfTheWeek: (locale: string, weekStart: WeekStart) => DisplayDaysOfTheWeek;
+export declare const getDisplayMonth: (calendarDisplayMonth: ChainDateType, locale: string) => string;
+export declare const getDisplayYear: (calendarDisplayMonth: ChainDateType) => number;
+export declare const getNewDisplayTimePeriods: (newTimePeriod: string) => {
+    calendarDisplayMonth: {
+        date: Date;
+        add: (value: number, period: TimePeriod, restrictToMonth?: boolean) => any;
+        clone: () => ChainDateType;
+        endOfMonth: () => any;
+        endOfYear: () => any;
+        format: () => string;
+        getDate: () => number;
+        getDay: () => number;
+        getFullYear: () => number;
+        getMonth: () => number;
+        regenDate: () => void;
+        setDay: (day: number) => any;
+        setFullDate: (year: number, month: number, day: number) => any;
+        setMonth: (month: number, restrictToMonth?: boolean) => any;
+        setYear: (year: number, restrictToMonth?: boolean) => any;
+        startOfMonth: () => any;
+        startOfYear: () => any;
+    };
+    calendarMonthEndDate: string;
+    calendarMonthStartDate: string;
+};
+export declare function getUniqueId(prefix?: string): string;
+export declare const isDateValid: (date: string) => boolean;
+export declare const prependZeroes: (value: string, length: number) => string;
