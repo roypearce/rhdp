@@ -1,6 +1,7 @@
 import packageJson from './package.json';
 import pluginTypescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
+import del from 'rollup-plugin-delete';
 
 const moduleName = packageJson.name.replace(/^@.*\//, '');
 const banner = `
@@ -14,6 +15,7 @@ const banner = `
 const deps = Object.keys(packageJson.dependencies || []).concat(Object.keys(packageJson.peerDependencies));
 
 const entryFile = 'src/index.ts';
+const plugins = [del({ targets: 'dist/*' }), pluginTypescript(), terser()];
 
 export default [
   {
@@ -30,7 +32,7 @@ export default [
       sourcemap: true,
     },
     external: deps,
-    plugins: [pluginTypescript(), terser()],
+    plugins,
   },
   {
     input: entryFile,
@@ -45,6 +47,6 @@ export default [
       sourcemap: true,
     },
     external: deps,
-    plugins: [pluginTypescript(), terser()],
+    plugins,
   },
 ];
