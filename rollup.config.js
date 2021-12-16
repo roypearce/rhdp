@@ -15,7 +15,6 @@ const banner = `
 const deps = Object.keys(packageJson.dependencies || []).concat(Object.keys(packageJson.peerDependencies));
 
 const entryFile = 'src/index.ts';
-const plugins = [del({ targets: 'dist/*' }), pluginTypescript(), terser()];
 
 export default [
   {
@@ -32,7 +31,7 @@ export default [
       sourcemap: true,
     },
     external: deps,
-    plugins,
+    plugins: [del({ targets: 'dist/*' }), pluginTypescript(), terser()],
   },
   {
     input: entryFile,
@@ -47,6 +46,6 @@ export default [
       sourcemap: true,
     },
     external: deps,
-    plugins,
+    plugins: [pluginTypescript(), terser()],
   },
 ];
