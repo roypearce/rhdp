@@ -25,10 +25,9 @@ export interface ChainDateType {
   startOfYear(): ChainDateType;
 }
 
-const initialDate = new Date();
-
 export const ChainDate = class implements ChainDateType {
-  date = initialDate;
+  public date;
+
   constructor(date?: Date | string) {
     this.date = date && date instanceof Date ? new Date(date) : new Date();
     if (date && !(date instanceof Date)) {
