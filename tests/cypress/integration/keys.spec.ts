@@ -478,7 +478,7 @@ describe('Key based navigation', () => {
     it('should go to the previous month when the first day of the month is selected and the left arrow is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
       cy.getId('div-month-year-title').contains('November 2021');
-      cy.getId('btn-day-2021-11-01').realClick();
+      cy.getId('btn-day-2021-11-01').click();
       cy.realPress('ArrowLeft');
       cy.getId('btn-day-2021-10-31').should('have.focus');
       cy.getId('div-month-year-title').contains('October 2021');
@@ -487,7 +487,7 @@ describe('Key based navigation', () => {
     it('should go to the previous month when the first day of the month is selected and the up arrow is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
       cy.getId('div-month-year-title').contains('November 2021');
-      cy.getId('btn-day-2021-11-01').realClick();
+      cy.getId('btn-day-2021-11-01').click();
       cy.realPress('ArrowUp');
       cy.getId('btn-day-2021-10-25').should('have.focus');
       cy.getId('div-month-year-title').contains('October 2021');
@@ -496,7 +496,7 @@ describe('Key based navigation', () => {
     it('should go to the next month when the last day of the month is selected and the right arrow is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
       cy.getId('div-month-year-title').contains('November 2021');
-      cy.getId('btn-day-2021-11-30').realClick();
+      cy.getId('btn-day-2021-11-30').click();
       cy.realPress('ArrowRight');
       cy.getId('btn-day-2021-12-01').should('have.focus');
       cy.getId('div-month-year-title').contains('December 2021');
@@ -505,7 +505,7 @@ describe('Key based navigation', () => {
     it('should go to the next month when the last day of the month is selected and the down arrow is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
       cy.getId('div-month-year-title').contains('November 2021');
-      cy.getId('btn-day-2021-11-30').realClick();
+      cy.getId('btn-day-2021-11-30').click();
       cy.realPress('ArrowDown');
       cy.getId('btn-day-2021-12-07').should('have.focus');
       cy.getId('div-month-year-title').contains('December 2021');
