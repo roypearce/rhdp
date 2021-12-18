@@ -1,0 +1,6 @@
+[
+  {
+    "path": "dist/module.js",
+    "limit": "5.5kb"
+  }
+]
