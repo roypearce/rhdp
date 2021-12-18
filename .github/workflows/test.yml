@@ -25,7 +25,11 @@ jobs:
         run: node --experimental-json-modules static-storybook-server.mjs &
         env:
           PORT: 6006
+      - name: Lint
+        run: yarn run lint
       - name: Unit tests
         run: yarn run test:unit
       - name: E2E tests
         run: yarn run test:e2e-headless
+      - name: Size Check
+        run: yarn run build && yarn run size

@@ -20,12 +20,16 @@ jobs:
         run: node --experimental-json-modules static-storybook-server.mjs &
         env:
           PORT: 6006
+      - name: Lint
+        run: yarn run lint
       - name: Unit tests
         run: yarn run test:unit
       - name: E2E tests
         run: yarn run test:e2e-headless
       - name: Build
         run: yarn run build
+      - name: Size Check
+        run: yarn run size
       - name: Save built files to main
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
