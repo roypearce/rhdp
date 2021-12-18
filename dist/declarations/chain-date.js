@@ -5,9 +5,8 @@ export var TimePeriod;
     TimePeriod[TimePeriod["Week"] = 2] = "Week";
     TimePeriod[TimePeriod["Year"] = 3] = "Year";
 })(TimePeriod || (TimePeriod = {}));
-const initialDate = new Date();
 export const ChainDate = class {
-    date = initialDate;
+    date;
     constructor(date) {
         this.date = date && date instanceof Date ? new Date(date) : new Date();
         if (date && !(date instanceof Date)) {

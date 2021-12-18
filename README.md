@@ -2,6 +2,10 @@
 
 A React Hook based primitive to build simple, flexible datepicker components that are WAI-ARIA compliant, and support localization.
 
+<img src="https://img.badgesize.io/roypearce/rhdp/main/dist/module.js.svg?compression=brotli&label=module size (brotli)"/>
+<img src="https://img.badgesize.io/roypearce/rhdp/main/dist/module.js.svg?compression=gzip&label=module size (gzip)"/>
+<img src="https://img.badgesize.io/roypearce/rhdp/main/dist/module.js.svg?label=module size (uncompressed)"/>
+
 ## The Problem
 
 You need a datepicker that can be fully customized in appearance, but it needs to be accessible, and flexible enough to meet your needs. It should work with any design system, including one built in-house, and have zero dependencies (besides React of course). It should also meet accessibility specs for screenreaders, as well as keyboard accessibility. It should also only concern itself with dates, a datepicker should not concern itself with time, or timezones.
@@ -24,7 +28,7 @@ Zero dependencies & purpose built.
 
 ## Installation
 
-- `yarn install rhdp` or `npm install --save rhdp`
+- `yarn add rhdp` or `npm install --save rhdp`
 
 ## Examples
 
