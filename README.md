@@ -32,11 +32,20 @@ Zero dependencies & purpose built.
 
 ## Examples
 
-Coming soon, but in the meantime you can clone this repo and run the Storybook examples locally.
+- [All defaults, no date pre-selected](https://codesandbox.io/s/rhdp-r4p0p)
 
+## Storybook
+### yarn
 ```
 git clone git@github.com:roypearce/rhdp.git
-cd rdhp
+cd rhdp
 yarn install
 yarn run storybook
+```
+### npm
+```
+git clone git@github.com:roypearce/rhdp.git
+cd rhdp
+npm install
+npm run storybook
 ```
