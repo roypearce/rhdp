@@ -24,7 +24,7 @@ Zero dependencies & purpose built.
 
 ## Props
 
-All props are fully typed in Typescript. 
+All props are fully typed in Typescript. This small subset is provided here for quick reference. [View the full types](https://github.com/roypearce/rhdp/tree/main/dist/declarations).
 
 | Property                     | Type                                       | Description                                                                |
 | ---------------------------- | ------------------------------------------ | -------------------------------------------------------------------------- |
@@ -49,11 +49,11 @@ All props are fully typed in Typescript.
 
 ## Returned props
 
-All returned props are fully typed in Typescript. 
+All returned props are fully typed in Typescript. This small subset is provided here for quick reference. [View the full types](https://github.com/roypearce/rhdp/tree/main/dist/declarations).
 
 | Property                         | Type                     | Description                                                                                  |
 | -------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------- |
-| `calendar`                       | `CalendarDay[][]`        | Represents the current month's calendar, see `CalendarDay` props for more details            |
+| `calendar`                       | `CalendarDay[][]`        | Represents the current month's calendar, see `CalendarDay` type for more details             |
 | `displayDaysOfTheWeek`           | `DisplayDaysOfTheWeek[]` | Each day of the week, localized, available in full, short and narrow formats                 |
 | `displayMonth`                   | `string`                 | Full month name, localized, of the displayed calendar month                                  |
 | `displayYear`                    | `string`                 | 4 digit year of the displayed calendar month                                                 |
@@ -73,6 +73,23 @@ All returned props are fully typed in Typescript.
 | `setMonth`                       | `function(number)`       | Set the month of the year for the calendar in the datepicker, 1 based (1-12)                 |
 | `setYear`                        | `function(number)`       | Set the 4 digit year for the calendar in the datepicker                                      |
 | `today`                          | `string`                 | Today's date in YYYY-MM-DD format                                                            |
+
+### CalendarDay type
+
+| Property      | Type      | Description                                                        |
+| ------------- | --------- | ------------------------------------------------------------------ |
+| `blocked`     | `boolean` | Whether the day is blocked and should not be selectable            |
+| `disabled`    | `boolean` | Whether the day is disabled and should not be selectable           |
+| `displayText` | `string`  | The number displayed in each cell of the calendar grid             |
+| `formatted`   | `string`  | The YYYY-MM-DD formatted string of the day                         |
+| `hovered`     | `boolean` | Whether the day is hovered                                         |
+| `index`       | `number`  | The day of the week index for this particular day (0-6)            |
+| `inMonth`     | `boolean` | Whether the day is in the visible month                            |
+| `inRange`     | `boolean` | Whether the day is in a selected range (mode: 'range')             |
+| `rangeEnd`    | `boolean` | Whether the day is the end of the selected range (mode: 'range')   |
+| `rangeStart`  | `boolean` | Whether the day is the start of the selected range (mode: 'range') |
+| `selected`    | `boolean` | Whether the day is selected                                        |
+| `today`       | `boolean` | Whether the day is today                                           |
 
 ## Localization
 
