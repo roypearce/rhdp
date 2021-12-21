@@ -26,7 +26,7 @@ Zero dependencies & purpose built.
 
 All props are fully typed in Typescript. 
 
-| property                     | type                                       | description                                                                |
+| Property                     | Type                                       | Description                                                                |
 | ---------------------------- | ------------------------------------------ | -------------------------------------------------------------------------- |
 | `blockedDates`               | `string[] \| string`                       | YYYY-MM-DD format, prevents selection of specified dates                   |
 | `focusOnInit`                | `boolean`                                  | Will cause focus to be set to the first of an array of dates or today      |
@@ -46,6 +46,33 @@ All props are fully typed in Typescript.
 | `selectDates`                | `string[] \| string`                       | YYYY-MM-DD format, pre-selects the supplied dates                          |
 | `onChange`                   | `function(string[] \| string)`             | Function called whenever the selected dates change                         |
 | `weekStart`                  | `0 \| 1`                                   | Changes the start day of the week from Sunday to Monday                    |
+
+## Returned props
+
+All returned props are fully typed in Typescript. 
+
+| Property                         | Type                     | Description                                                                                  |
+| -------------------------------- | ------------------------ | -------------------------------------------------------------------------------------------- |
+| `calendar`                       | `CalendarDay[][]`        | Represents the current month's calendar, see `CalendarDay` props for more details            |
+| `displayDaysOfTheWeek`           | `DisplayDaysOfTheWeek[]` | Each day of the week, localized, available in full, short and narrow formats                 |
+| `displayMonth`                   | `string`                 | Full month name, localized, of the displayed calendar month                                  |
+| `displayYear`                    | `string`                 | 4 digit year of the displayed calendar month                                                 |
+| `getCalendarContainerProps`      | `function()`             | Getter to apply attributes, methods & props to the calendar container                        |
+| `getCalendarWeekContainerProps`  | `function()`             | Getter to apply attributes, methods & props to the calendar week container                   |
+| `getDayOfTheWeekProps`           | `function()`             | Getter to apply attributes, methods & props to the each day of the week                      |
+| `getDaysOfTheWeekContainerProps` | `function()`             | Getter to apply attributes, methods & props to the days of the week container                |
+| `getHideDatepickerButtonProps`   | `function()`             | Getter to apply attributes, methods & props to the hide datepicker button                    |
+| `getControlsContainerProps`      | `function()`             | Getter to apply attributes, methods & props to the controls container (prev/next month/year) |
+| `getDatepickerContainerProps`    | `function()`             | Getter to apply attributes, methods & props to the datepicker container                      |
+| `getDayButtonProps`              | `function()`             | Getter to apply attributes, methods & props to the buttons of each day in the calendar       |
+| `getMonthYearContainerProps`     | `function()`             | Getter to apply attributes, methods & props to the month/year container                      |
+| `getNextMonthButtonProps`        | `function()`             | Getter to apply attributes, methods & props to the next month button                         |
+| `getNextYearButtonProps`         | `function()`             | Getter to apply attributes, methods & props to the next year button                          |
+| `getPreviousMonthButtonProps`    | `function()`             | Getter to apply attributes, methods & props to the previous month button                     |
+| `getPreviousYearButtonProps`     | `function()`             | Getter to apply attributes, methods & props to the previous year button                      |
+| `setMonth`                       | `function(number)`       | Set the month of the year for the calendar in the datepicker, 1 based (1-12)                 |
+| `setYear`                        | `function(number)`       | Set the 4 digit year for the calendar in the datepicker                                      |
+| `today`                          | `string`                 | Today's date in YYYY-MM-DD format                                                            |
 
 ## Localization
 
