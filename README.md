@@ -22,6 +22,31 @@ RHDP takes in the ISO 8601 extended date format, that's to say `YYYY-MM-DD` and 
 
 Zero dependencies & purpose built.
 
+## Props
+
+All props are fully typed in Typescript. 
+
+| property                     | type                                       | description                                                                |
+| ---------------------------- | ------------------------------------------ | -------------------------------------------------------------------------- |
+| `blockedDates`               | `string[] \| string`                       | YYYY-MM-DD format, prevents selection of specified dates                   |
+| `focusOnInit`                | `boolean`                                  | Will cause focus to be set to the first of an array of dates or today      |
+| `hideDatepicker`             | `function()`                               | Function which is executed when date selection criteria is satisfied       |
+| `labels`                     | `object`                                   | Button labels for accessibility, English defaults provided                 |
+| `labels.closeButton`         | `string`                                   |                                                                            |
+| `labels.dateSelected`        | `string`                                   |                                                                            |
+| `labels.nextMonthButton`     | `string`                                   |                                                                            |
+| `labels.nextYearButton`      | `string`                                   |                                                                            |
+| `labels.previousMonthButton` | `string`                                   |                                                                            |
+| `labels.previousYearButton`  | `string`                                   |                                                                            |
+| `labels.today`               | `string`                                   |                                                                            |
+| `locale`                     | `Intl.DateTimeFormat`                      | Defaults to en-US, see Localization section for more details               |
+| `maxDate`                    | `string`                                   | YYYY-MM-DD format, if set prevents selection & navigation past that date   |
+| `minDate`                    | `string`                                   | YYYY-MM-DD format, if set prevents selection & navigation before that date |
+| `mode`                       | `'single' \| 'range' \| 'multiple' \| number` | Sets the selection mode for the datepicker, number is a max # of dates  |
+| `selectDates`                | `string[] \| string`                       | YYYY-MM-DD format, pre-selects the supplied dates                          |
+| `onChange`                   | `function(string[] \| string)`             | Function called whenever the selected dates change                         |
+| `weekStart`                  | `0 \| 1`                                   | Changes the start day of the week from Sunday to Monday                    |
+
 ## Localization
 
 [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat) is used to automatically localize the days of the week and the months of the year for display if the `locale` prop is passed [with a valid locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#using_locales). There are labels that can be passed in for various elements which are used by screen readers, and by default English values are supplied, but for other languages, the labels will need to be supplied by your localization system.
@@ -33,6 +58,7 @@ Zero dependencies & purpose built.
 ## Examples
 
 - [All defaults, no date pre-selected](https://codesandbox.io/s/rhdp-r4p0p)
+- [Single date pre-selected](https://codesandbox.io/s/rhdp-single-date-selected-kb24f)
 
 ## Storybook
 ### yarn
