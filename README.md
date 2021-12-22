@@ -106,6 +106,7 @@ All returned props are fully typed in Typescript. This small subset is provided 
 - [Range date pre-selected](https://codesandbox.io/s/rhdp-rang-date-selected-45vpz)
 - [Multiple dates pre-selected](https://codesandbox.io/s/rhdp-multiple-dates-pre-selected-2dy4x)
 - [Max multiple dates pre-selected](https://codesandbox.io/s/rhdp-max-multiple-dates-pre-selected-hkg8c)
+- [Min date and max date set with single date pre-selected](https://codesandbox.io/s/rhdp-max-multiple-dates-pre-selected-forked-mep22)
 
 ## Storybook
 ### yarn
