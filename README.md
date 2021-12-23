@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/roypearce/rhdp/main/.storybook/rhdp-logo.svg" alt="RHDP - React Hook Datepicker" width="200" />
+
 # RHDP - React Hook Datepicker
 
 A React Hook based primitive to build simple, flexible datepicker components that are WAI-ARIA compliant, and support localization.
