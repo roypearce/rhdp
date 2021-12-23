@@ -110,6 +110,7 @@ All returned props are fully typed in Typescript. This small subset is provided 
 - [Max multiple dates pre-selected](https://codesandbox.io/s/rhdp-max-multiple-dates-pre-selected-hkg8c)
 - [Min date and max date set with single date pre-selected](https://codesandbox.io/s/rhdp-max-multiple-dates-pre-selected-forked-mep22)
 - [Blocked dates with single date pre-selected](https://codesandbox.io/s/rhdp-blocked-dates-nv1ol)
+- [Datepicker with button launcher](https://codesandbox.io/s/rhdp-datepicker-with-button-launcher-hojov)
 
 ## Storybook
 ### yarn
