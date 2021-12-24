@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import ChainDate, { TimePeriod } from './chain-date';
 import { dotwSearchPaths } from './enums';
-import { SearchDirection, } from './types';
+import { SearchDirection } from './types';
 import { convertToStringArray, getDaysOfTheWeek, getDisplayMonth, getDisplayYear, getNewDisplayTimePeriods, getUniqueId, isDateValid, } from './util';
 const now = new ChainDate();
-export const useDatepicker = ({ blockedDates = [], focusOnInit = false, hideDatepicker, labels, locale = 'en-US', maxDate, minDate, mode = 'single', onChange, selectDates, weekStart = 0, }) => {
+export const useDatepicker = ({ blockedDates = [], focusOnInit = false, onClose, labels, locale = 'en-US', maxDate, minDate, mode = 'single', onChange, selectDates, weekStart = 0, }) => {
     const [calendar, setCalendar] = useState([[]]);
     const [calendarFocused, setCalendarFocused] = useState(false);
     const [controlsFocused, setControlsFocused] = useState(false);
@@ -187,8 +187,8 @@ export const useDatepicker = ({ blockedDates = [], focusOnInit = false, hideDate
                 document.getElementById(focusedDate)?.focus();
             }, 0);
         }
-        if (hideDatepicker && dateClicked && isDateSelectionCriteriaSatisfied) {
-            hideDatepicker();
+        if (onClose && dateClicked && isDateSelectionCriteriaSatisfied) {
+            onClose();
         }
         setInternalState({
             displayMonth: getDisplayMonth(calendarDisplayMonth, locale),
@@ -472,15 +472,15 @@ export const useDatepicker = ({ blockedDates = [], focusOnInit = false, hideDate
             role: 'row',
         };
     };
-    const getHideDatepickerButtonProps = () => {
+    const getOnCloseButtonProps = () => {
         return {
             'aria-label': internalLabels.current.closeButton,
             onClick: () => {
-                if (hideDatepicker) {
+                if (onClose) {
                     setCalendarFocused(false);
                     setControlsFocused(false);
                     setDatepickerFocused(false);
-                    hideDatepicker();
+                    onClose();
                 }
             },
             tabIndex: datepickerFocused ? 0 : -1,
@@ -647,8 +647,8 @@ export const useDatepicker = ({ blockedDates = [], focusOnInit = false, hideDate
                 return;
             case 'Esc':
             case 'Escape':
-                if (hideDatepicker) {
-                    hideDatepicker();
+                if (onClose) {
+                    onClose();
                 }
                 evt.preventDefault();
                 return;
@@ -678,7 +678,7 @@ export const useDatepicker = ({ blockedDates = [], focusOnInit = false, hideDate
         if (onChange) {
             let returnValue = newDates;
             if (mode === 'single') {
-                returnValue = newDates.length ? newDates[0] : null;
+                returnValue = newDates.length ? newDates[0] : '';
             }
             onChange(returnValue);
         }
@@ -715,7 +715,7 @@ export const useDatepicker = ({ blockedDates = [], focusOnInit = false, hideDate
         getCalendarWeekContainerProps,
         getDayOfTheWeekProps,
         getDaysOfTheWeekContainerProps,
-        getHideDatepickerButtonProps,
+        getOnCloseButtonProps,
         getControlsContainerProps,
         getDatepickerContainerProps,
         getDayButtonProps,
