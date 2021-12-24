@@ -601,7 +601,7 @@ export const ShowHide = () => {
         {isSingleDatepickerVisible && (
           <Datepicker
             focusOnInit={true}
-            hideDatepicker={() => setSingleDatepickerVisible(false)}
+            onClose={() => setSingleDatepickerVisible(false)}
             labels={labels}
             mode="single"
             onChange={(newDate) => {
@@ -626,7 +626,7 @@ export const ShowHide = () => {
         {isRangeDatepickerVisible && (
           <Datepicker
             focusOnInit={true}
-            hideDatepicker={() => setRangeDatepickerVisible(false)}
+            onClose={() => setRangeDatepickerVisible(false)}
             labels={labels}
             mode="range"
             onChange={(newDate) => {
@@ -650,7 +650,7 @@ export const ShowHide = () => {
         {isMultipleDatepickerVisible && (
           <Datepicker
             focusOnInit={true}
-            hideDatepicker={() => setMultipleDatepickerVisible(false)}
+            onClose={() => setMultipleDatepickerVisible(false)}
             labels={labels}
             mode="multiple"
             onChange={(newDate) => {
@@ -674,7 +674,7 @@ export const ShowHide = () => {
         {isMultipleMaxDatepickerVisible && (
           <Datepicker
             focusOnInit={true}
-            hideDatepicker={() => setMultipleMaxDatepickerVisible(false)}
+            onClose={() => setMultipleMaxDatepickerVisible(false)}
             labels={labels}
             mode={4}
             onChange={(newDate) => {

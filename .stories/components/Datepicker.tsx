@@ -10,7 +10,7 @@ const Datepicker = ({
   blockedDates,
   datepickerMethods,
   focusOnInit,
-  hideDatepicker,
+  onClose,
   labels,
   locale,
   maxDate,
@@ -29,7 +29,7 @@ const Datepicker = ({
     getCalendarWeekContainerProps,
     getDayOfTheWeekProps,
     getDaysOfTheWeekContainerProps,
-    getHideDatepickerButtonProps,
+    getOnCloseButtonProps,
     getControlsContainerProps,
     getDatepickerContainerProps,
     getDayButtonProps,
@@ -45,7 +45,7 @@ const Datepicker = ({
   } = useDatepicker({
     blockedDates,
     focusOnInit,
-    hideDatepicker,
+    onClose,
     labels,
     locale,
     maxDate,
@@ -181,13 +181,13 @@ const Datepicker = ({
 
   return (
     <div className="datepicker-container" data-testid="div-datepicker" {...getDatepickerContainerProps()}>
-      {hideDatepicker && (
+      {onClose && (
         <div className="close-container">
           <button
             className="button-reset control-button close-button"
             data-testid="btn-close"
             type="button"
-            {...getHideDatepickerButtonProps()}
+            {...getOnCloseButtonProps()}
           >
             <img
               aria-hidden={true}

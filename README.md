@@ -28,26 +28,26 @@ Zero dependencies & purpose built.
 
 All props are fully typed in Typescript. This small subset is provided here for quick reference. [View the full types](https://github.com/roypearce/rhdp/tree/main/dist/declarations).
 
-| Property                     | Type                                       | Description                                                                |
-| ---------------------------- | ------------------------------------------ | -------------------------------------------------------------------------- |
-| `blockedDates`               | `string[] \| string`                       | YYYY-MM-DD format, prevents selection of specified dates                   |
-| `focusOnInit`                | `boolean`                                  | Will cause focus to be set to the first of an array of dates or today      |
-| `hideDatepicker`             | `function()`                               | Function which is executed when date selection criteria is satisfied       |
-| `labels`                     | `object`                                   | Button labels for accessibility, English defaults provided                 |
-| `labels.closeButton`         | `string`                                   |                                                                            |
-| `labels.dateSelected`        | `string`                                   |                                                                            |
-| `labels.nextMonthButton`     | `string`                                   |                                                                            |
-| `labels.nextYearButton`      | `string`                                   |                                                                            |
-| `labels.previousMonthButton` | `string`                                   |                                                                            |
-| `labels.previousYearButton`  | `string`                                   |                                                                            |
-| `labels.today`               | `string`                                   |                                                                            |
-| `locale`                     | `Intl.DateTimeFormat`                      | Defaults to en-US, see Localization section for more details               |
-| `maxDate`                    | `string`                                   | YYYY-MM-DD format, if set prevents selection & navigation past that date   |
-| `minDate`                    | `string`                                   | YYYY-MM-DD format, if set prevents selection & navigation before that date |
-| `mode`                       | `'single' \| 'range' \| 'multiple' \| number` | Sets the selection mode for the datepicker, number is a max # of dates  |
-| `selectDates`                | `string[] \| string`                       | YYYY-MM-DD format, pre-selects the supplied dates                          |
-| `onChange`                   | `function(string[] \| string)`             | Function called whenever the selected dates change                         |
-| `weekStart`                  | `0 \| 1`                                   | Changes the start day of the week from Sunday to Monday                    |
+| Property                     | Type                                          | Description                                                                                    |
+| ---------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `blockedDates`               | `string[] \| string`                          | YYYY-MM-DD format, prevents selection of specified dates                                       |
+| `focusOnInit`                | `boolean`                                     | Will cause focus to be set to the first of an array of dates or today                          |
+| `labels`                     | `object`                                      | Button labels for accessibility, English defaults provided                                     |
+| `labels.closeButton`         | `string`                                      |                                                                                                |
+| `labels.dateSelected`        | `string`                                      |                                                                                                |
+| `labels.nextMonthButton`     | `string`                                      |                                                                                                |
+| `labels.nextYearButton`      | `string`                                      |                                                                                                |
+| `labels.previousMonthButton` | `string`                                      |                                                                                                |
+| `labels.previousYearButton`  | `string`                                      |                                                                                                |
+| `labels.today`               | `string`                                      |                                                                                                |
+| `locale`                     | `Intl.DateTimeFormat`                         | Defaults to en-US, see Localization section for more details                                   |
+| `maxDate`                    | `string`                                      | YYYY-MM-DD format, if set prevents selection & navigation past that date                       |
+| `minDate`                    | `string`                                      | YYYY-MM-DD format, if set prevents selection & navigation before that date                     |
+| `mode`                       | `'single' \| 'range' \| 'multiple' \| number` | Sets the selection mode for the datepicker, number is a max # of dates                         |
+| `onChange`                   | `function(string[] \| string)`                | Function called whenever the selected dates change (string in single mode, otherwise an array) |
+| `onClose`                    | `function()`                                  | Function which is executed when date selection criteria is satisfied                           |
+| `selectDates`                | `string[] \| string`                          | YYYY-MM-DD format, pre-selects the supplied dates                                              |
+| `weekStart`                  | `0 \| 1`                                      | Changes the start day of the week from Sunday to Monday                                        |
 
 ## Returned props
 
@@ -63,13 +63,13 @@ All returned props are fully typed in Typescript. This small subset is provided 
 | `getCalendarWeekContainerProps`  | `function()`             | Getter to apply attributes, methods & props to the calendar week container                   |
 | `getDayOfTheWeekProps`           | `function()`             | Getter to apply attributes, methods & props to the each day of the week                      |
 | `getDaysOfTheWeekContainerProps` | `function()`             | Getter to apply attributes, methods & props to the days of the week container                |
-| `getHideDatepickerButtonProps`   | `function()`             | Getter to apply attributes, methods & props to the hide datepicker button                    |
 | `getControlsContainerProps`      | `function()`             | Getter to apply attributes, methods & props to the controls container (prev/next month/year) |
 | `getDatepickerContainerProps`    | `function()`             | Getter to apply attributes, methods & props to the datepicker container                      |
 | `getDayButtonProps`              | `function()`             | Getter to apply attributes, methods & props to the buttons of each day in the calendar       |
 | `getMonthYearContainerProps`     | `function()`             | Getter to apply attributes, methods & props to the month/year container                      |
 | `getNextMonthButtonProps`        | `function()`             | Getter to apply attributes, methods & props to the next month button                         |
 | `getNextYearButtonProps`         | `function()`             | Getter to apply attributes, methods & props to the next year button                          |
+| `getOnCloseButtonProps`          | `function()`             | Getter to apply attributes, methods & props to the hide datepicker button                    |
 | `getPreviousMonthButtonProps`    | `function()`             | Getter to apply attributes, methods & props to the previous month button                     |
 | `getPreviousYearButtonProps`     | `function()`             | Getter to apply attributes, methods & props to the previous year button                      |
 | `setMonth`                       | `function(number)`       | Set the month of the year for the calendar in the datepicker, 1 based (1-12)                 |
@@ -113,14 +113,18 @@ All returned props are fully typed in Typescript. This small subset is provided 
 - [Datepicker with button launcher](https://codesandbox.io/s/rhdp-datepicker-with-button-launcher-hojov)
 
 ## Storybook
+
 ### yarn
+
 ```
 git clone git@github.com:roypearce/rhdp.git
 cd rhdp
 yarn install
 yarn run storybook
 ```
+
 ### npm
+
 ```
 git clone git@github.com:roypearce/rhdp.git
 cd rhdp
