@@ -65,8 +65,6 @@ export interface InternalRef {
   weekStart: number;
 }
 
-export type OnChangeResponse = SelectedDates | null;
-
 export enum RenderType {
   Initial,
   Programmatic,
@@ -78,7 +76,7 @@ export type SelectedDates = string | string[];
 export interface UseDatepickerProps {
   blockedDates?: SelectedDates;
   focusOnInit?: boolean;
-  hideDatepicker?(): void;
+  onClose?(): void;
   labels?: {
     closeButton?: string;
     dateSelected?: string;
@@ -92,7 +90,7 @@ export interface UseDatepickerProps {
   maxDate?: string;
   minDate?: string;
   mode?: DateSelectionMode;
-  onChange?(newDates: OnChangeResponse): void;
+  onChange?(newDates: SelectedDates): void;
   selectDates?: SelectedDates;
   weekStart?: WeekStart;
 }
@@ -120,7 +118,7 @@ export interface UseDatepicker {
   getDaysOfTheWeekContainerProps(): {
     role: string;
   };
-  getHideDatepickerButtonProps(): {
+  getOnCloseButtonProps(): {
     'aria-label': string;
     onClick(): void;
   };

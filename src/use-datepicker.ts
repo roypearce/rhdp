@@ -1,15 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import ChainDate, { ChainDateType, TimePeriod } from './chain-date';
 import { dotwSearchPaths } from './enums';
-import {
-  UseDatepickerProps,
-  UseDatepicker,
-  CalendarDay,
-  InternalRef,
-  OnChangeResponse,
-  SelectedDates,
-  SearchDirection,
-} from './types';
+import { UseDatepickerProps, UseDatepicker, CalendarDay, InternalRef, SelectedDates, SearchDirection } from './types';
 import {
   convertToStringArray,
   getDaysOfTheWeek,
@@ -25,7 +17,7 @@ const now = new ChainDate();
 export const useDatepicker = ({
   blockedDates = [],
   focusOnInit = false,
-  hideDatepicker,
+  onClose,
   labels,
   locale = 'en-US',
   maxDate,
@@ -250,8 +242,8 @@ export const useDatepicker = ({
       }, 0);
     }
 
-    if (hideDatepicker && dateClicked && isDateSelectionCriteriaSatisfied) {
-      hideDatepicker();
+    if (onClose && dateClicked && isDateSelectionCriteriaSatisfied) {
+      onClose();
     }
 
     setInternalState({
@@ -570,15 +562,15 @@ export const useDatepicker = ({
     };
   };
 
-  const getHideDatepickerButtonProps = () => {
+  const getOnCloseButtonProps = () => {
     return {
       'aria-label': internalLabels.current.closeButton,
       onClick: () => {
-        if (hideDatepicker) {
+        if (onClose) {
           setCalendarFocused(false);
           setControlsFocused(false);
           setDatepickerFocused(false);
-          hideDatepicker();
+          onClose();
         }
       },
       tabIndex: datepickerFocused ? 0 : -1,
@@ -765,8 +757,8 @@ export const useDatepicker = ({
         return;
       case 'Esc':
       case 'Escape':
-        if (hideDatepicker) {
-          hideDatepicker();
+        if (onClose) {
+          onClose();
         }
         evt.preventDefault();
         return;
@@ -796,9 +788,9 @@ export const useDatepicker = ({
 
   const handleOnChange = (newDates: SelectedDates) => {
     if (onChange) {
-      let returnValue: OnChangeResponse = newDates;
+      let returnValue = newDates;
       if (mode === 'single') {
-        returnValue = newDates.length ? newDates[0] : null;
+        returnValue = newDates.length ? newDates[0] : '';
       }
       onChange(returnValue);
     }
@@ -849,7 +841,7 @@ export const useDatepicker = ({
     getCalendarWeekContainerProps,
     getDayOfTheWeekProps,
     getDaysOfTheWeekContainerProps,
-    getHideDatepickerButtonProps,
+    getOnCloseButtonProps,
     getControlsContainerProps,
     getDatepickerContainerProps,
     getDayButtonProps,

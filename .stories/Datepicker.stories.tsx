@@ -137,7 +137,7 @@ export const ShowHide = () => {
       {isDatepickerVisible && (
         <Datepicker
           focusOnInit={true}
-          hideDatepicker={() => setDatepickerVisible(false)}
+          onClose={() => setDatepickerVisible(false)}
           labels={labels}
           mode="single"
           onChange={(newDate) => {
