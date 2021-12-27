@@ -61,6 +61,12 @@ describe('Previous month controls', () => {
     cy.realPress('Tab');
     cy.getId('btn-day-2021-07-08').should('have.focus');
   });
+
+  it('should have the previous month disabled when max mode is used and the 1st of the month is the first date selected', () => {
+    cy.visitStory('tests--limited-multiple-date-preselected');
+    cy.getId('btn-day-2021-11-01').should('have.attr', 'aria-selected', 'true');
+    cy.getId('btn-previous-month').should('be.disabled');
+  });
 });
 
 describe('Next month controls', () => {
@@ -96,6 +102,17 @@ describe('Next month controls', () => {
   it('should let arrow navigation work from the new focused date as expected', () => {
     cy.realPress('ArrowUp');
     cy.getId('btn-day-2022-02-21').should('have.focus');
+  });
+
+  it('should have the next month disabled when max mode is used and the 1st of the month is the first date selected', () => {
+    cy.visitStory('tests--limited-multiple-date-preselected');
+    cy.getId('btn-day-2021-11-01')
+      .should('have.attr', 'aria-selected', 'true')
+      .click()
+      .should('not.have.attr', 'aria-selected');
+    cy.getId('btn-day-2021-11-30').should('not.have.attr', 'aria-selected');
+    cy.getId('btn-day-2021-11-30').should('not.be.disabled').click().should('have.attr', 'aria-selected', 'true');
+    cy.getId('btn-next-month').should('be.disabled');
   });
 });
 
