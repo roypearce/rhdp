@@ -628,7 +628,7 @@ export const useDatepicker = ({
       'aria-label': previousMonth,
       disabled:
         (minDate && calendarMonthStartDate < minDate) ||
-        (isMaxModeReached() && selectedDates[0] > calendarMonthStartDate),
+        (isMaxModeReached() && selectedDates[0] >= calendarMonthStartDate),
       onClick: () => {
         changeCalendarDisplayPeriod(TimePeriod.Month, -1);
       },
