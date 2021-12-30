@@ -1,3 +1,33 @@
+describe('Close button control', () => {
+  it('should close the datepicker when clicked', () => {
+    cy.visitStory('tests--show-hide');
+    cy.getId('btn-show-hide-single').click();
+    cy.getId('btn-close').should('be.visible').click();
+    cy.getId('btn-close').should('not.exist');
+  });
+
+  it('should close the datepicker when Enter is pressed', () => {
+    cy.visitStory('tests--input');
+    cy.getId('btn-datepicker-icon').click();
+    cy.getId('btn-close').should('be.visible');
+    cy.getId('btn-day-2021-11-08').should('have.attr', 'aria-selected', 'true');
+    cy.realPress(['Shift', 'Tab']);
+    cy.realPress(['Shift', 'Tab']);
+    cy.realPress(['Shift', 'Tab']);
+    cy.realPress(['Shift', 'Tab']);
+    cy.realPress(['Shift', 'Tab']);
+    cy.getId('btn-close').should('have.focus');
+    cy.realPress('Enter');
+    cy.getId('btn-close').should('not.exist');
+  });
+
+  it('should not change the value when closed with the Enter key', () => {
+    cy.getId('btn-datepicker-icon').click();
+    cy.getId('btn-close').should('be.visible');
+    cy.getId('btn-day-2021-11-08').should('have.attr', 'aria-selected', 'true');
+  });
+});
+
 describe('Previous year controls', () => {
   it('should go to the right month one year prior', () => {
     cy.visitStory('tests--single-date-preselected');
