@@ -562,23 +562,6 @@ export const useDatepicker = ({
     };
   };
 
-  const getOnCloseButtonProps = () => {
-    return {
-      'aria-label': internalLabels.current.closeButton,
-      onClick: () => {
-        if (onClose) {
-          setCalendarFocused(false);
-          setControlsFocused(false);
-          setDatepickerFocused(false);
-          onClose();
-        }
-      },
-      tabIndex: datepickerFocused ? 0 : -1,
-      title: internalLabels.current.closeButton,
-      type: 'button',
-    };
-  };
-
   const getMonthYearContainerProps = () => {
     return {
       'aria-atomic': 'true',
@@ -617,6 +600,23 @@ export const useDatepicker = ({
       },
       tabIndex: datepickerFocused ? 0 : -1,
       title: nextYear,
+      type: 'button',
+    };
+  };
+
+  const getOnCloseButtonProps = () => {
+    return {
+      'aria-label': internalLabels.current.closeButton,
+      onClick: () => {
+        if (onClose) {
+          setCalendarFocused(false);
+          setControlsFocused(false);
+          setDatepickerFocused(false);
+          onClose();
+        }
+      },
+      tabIndex: datepickerFocused ? 0 : -1,
+      title: internalLabels.current.closeButton,
       type: 'button',
     };
   };
@@ -752,8 +752,6 @@ export const useDatepicker = ({
         break;
       case ' ':
       case 'Enter':
-        evt.preventDefault();
-        document.getElementById(dateToFocus)?.click();
         return;
       case 'Esc':
       case 'Escape':

@@ -1,5 +1,4 @@
 import { ReactNode, useRef, useState } from 'react';
-import ChainDate from '../../src/chain-date';
 import { DateSelectionMode, SelectedDates, WeekStart } from '../../src/types';
 import Datepicker from '../components/Datepicker';
 
@@ -683,6 +682,58 @@ export const ShowHide = () => {
           />
         )}
       </div>
+    </div>
+  );
+};
+
+export const Input = () => {
+  const [selectedDate, setSelectedDate] = useState<SelectedDates>('2021-11-08');
+  const [displayDate, setDisplayDate] = useState<string>();
+  const [isDatepickerOpen, setIsDatepickerOpen] = useState(false);
+
+  return (
+    <div>
+      <label htmlFor="datepicker-input">Select a date</label>
+      <br />
+      <input
+        defaultValue={displayDate}
+        id="datepicker-input"
+        onChange={(evt) => {
+          const [month, day, year] = evt.target.value.match(/\d+/g) || ['', '', ''];
+          setDisplayDate(evt.target.value);
+          setSelectedDate(`${year}-${month}-${day}`);
+        }}
+        placeholder="mm/dd/yyyy"
+        type="text"
+      />
+
+      <button data-testid="btn-datepicker-icon" onClick={() => setIsDatepickerOpen(!isDatepickerOpen)} type="button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-calendar"
+          viewBox="0 0 16 16"
+        >
+          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+        </svg>
+      </button>
+
+      {isDatepickerOpen && (
+        <Datepicker
+          focusOnInit={true}
+          onChange={(newDate) => {
+            const [year, month, day] = (newDate as string).match(/\d+/g) || ['', '', ''];
+            if (year && month && day) {
+              setDisplayDate(`${month}/${day}/${year}`);
+            }
+            setSelectedDate(newDate);
+          }}
+          onClose={() => setIsDatepickerOpen(false)}
+          selectDates={selectedDate as SelectedDates}
+        />
+      )}
     </div>
   );
 };
