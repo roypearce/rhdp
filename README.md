@@ -119,6 +119,7 @@ If the datepicker is going to be contained in a popover, `focusOnInit`, `hasFocu
 - [Min date and max date set with single date pre-selected](https://codesandbox.io/s/rhdp-max-multiple-dates-pre-selected-forked-mep22)
 - [Blocked dates with single date pre-selected](https://codesandbox.io/s/rhdp-blocked-dates-nv1ol)
 - [Datepicker with button launcher](https://codesandbox.io/s/rhdp-datepicker-with-button-launcher-hojov)
+- [Datepicker with editable input](https://codesandbox.io/s/rhdp-datepicker-with-editable-input-jwel6)
 
 ## Storybook
 
