@@ -74,7 +74,7 @@ export declare type SelectedDates = string | string[];
 export interface UseDatepickerProps {
     blockedDates?: SelectedDates;
     focusOnInit?: boolean;
-    onClose?(): void;
+    hasFocusTrap?: boolean;
     labels?: {
         closeButton?: string;
         dateSelected?: string;
@@ -89,6 +89,7 @@ export interface UseDatepickerProps {
     minDate?: string;
     mode?: DateSelectionMode;
     onChange?(newDates: SelectedDates): void;
+    onClose?(): void;
     selectDates?: SelectedDates;
     weekStart?: WeekStart;
 }
@@ -98,7 +99,6 @@ export interface UseDatepicker {
     displayMonth: string;
     displayYear: number;
     focusedDate: string;
-    hoveredDate: string;
     getCalendarContainerProps(): {
         onBlur(evt: any): void;
         onFocus(): void;
@@ -106,24 +106,13 @@ export interface UseDatepicker {
     getCalendarWeekContainerProps(): {
         [key: string]: string;
     };
-    getDayOfTheWeekProps(index: number): {
-        abbr: string;
-        id: string;
-        scope: string;
-    };
-    getDaysOfTheWeekContainerProps(): {
-        role: string;
-    };
-    getOnCloseButtonProps(): {
-        'aria-label': string;
-        onClick(): void;
-    };
     getControlsContainerProps(): {
         onBlur(evt: any): void;
         onFocus(): void;
     };
     getDatepickerContainerProps(): {
         'aria-activedescendant': string;
+        id: string;
         onBlur(evt: any): void;
         onFocus(): void;
         onKeyDown(evt: any): void;
@@ -132,6 +121,14 @@ export interface UseDatepicker {
         id: string;
         onClick(): void;
         tabIndex: number;
+    };
+    getDayOfTheWeekProps(index: number): {
+        abbr: string;
+        id: string;
+        scope: string;
+    };
+    getDaysOfTheWeekContainerProps(): {
+        role: string;
     };
     getMonthYearContainerProps(): {
         [key: string]: string;
@@ -148,10 +145,16 @@ export interface UseDatepicker {
         onClick(): void;
         tabIndex: number;
     };
+    getOnCloseButtonProps(): {
+        'aria-label': string;
+        onClick(): void;
+    };
     getPreviousYearButtonProps(): {
         onClick(): void;
         tabIndex: number;
     };
+    hoveredDate: string;
+    id: string;
     selectedDates: SelectedDates;
     setMonth(month: number): void;
     setYear(year: number): void;
