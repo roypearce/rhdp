@@ -198,7 +198,7 @@ test('getNewDisplayTimePeriods', () => {
 });
 
 test('getUniqueId', () => {
-  expect(getUniqueId()).toEqual('rdhp-id-1');
+  expect(getUniqueId()).toEqual('rhdp-id-1');
   expect(getUniqueId('test')).toEqual('test2');
 });
 

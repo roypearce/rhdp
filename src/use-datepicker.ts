@@ -7,6 +7,7 @@ import {
   getDaysOfTheWeek,
   getDisplayMonth,
   getDisplayYear,
+  getFocusableElements,
   getNewDisplayTimePeriods,
   getUniqueId,
   isDateValid,
@@ -17,13 +18,14 @@ const now = new ChainDate();
 export const useDatepicker = ({
   blockedDates = [],
   focusOnInit = false,
-  onClose,
+  hasFocusTrap = false,
   labels,
   locale = 'en-US',
   maxDate,
   minDate,
   mode = 'single',
   onChange,
+  onClose,
   selectDates,
   weekStart = 0,
 }: UseDatepickerProps): UseDatepicker => {
@@ -499,6 +501,7 @@ export const useDatepicker = ({
   const getDatepickerContainerProps = () => {
     return {
       'aria-activedescendant': internalRef.current.focusedDate,
+      id: internalRef.current.id,
       onBlur: (evt: FocusEvent) => {
         if (!(evt.currentTarget as HTMLInputElement)?.contains(evt.relatedTarget as HTMLInputElement)) {
           setDatepickerFocused(false);
@@ -687,7 +690,7 @@ export const useDatepicker = ({
   };
 
   const handleKeydown = (evt: KeyboardEvent) => {
-    if (evt.key === 'Tab' || (controlsFocused && evt.key !== 'PageDown' && evt.key !== 'PageUp')) {
+    if ((evt.key === 'Tab' && !hasFocusTrap) || (controlsFocused && evt.key !== 'PageDown' && evt.key !== 'PageUp')) {
       return;
     }
 
@@ -748,6 +751,21 @@ export const useDatepicker = ({
         } else {
           // same date in the next month
           newFocusedDate = new ChainDate(dateToFocus).add(1, TimePeriod.Month, true).format();
+        }
+        break;
+      case 'Tab':
+        // only gets here if hasFocusTrap is true
+        // creates circular tab navigation within the datepicker
+        const tabElements = getFocusableElements(document.getElementById(internalRef.current.id));
+        if (tabElements.length) {
+          const activeIndex = tabElements.findIndex((el) => el === document.activeElement);
+          if (activeIndex === 0 && evt.shiftKey) {
+            evt.preventDefault();
+            (tabElements[tabElements.length - 1] as HTMLElement).focus();
+          } else if (activeIndex === tabElements.length - 1 && !evt.shiftKey) {
+            evt.preventDefault();
+            (tabElements[0] as HTMLElement).focus();
+          }
         }
         break;
       case ' ':
@@ -849,6 +867,7 @@ export const useDatepicker = ({
     getPreviousMonthButtonProps,
     getPreviousYearButtonProps,
     hoveredDate,
+    id: internalRef.current.id,
     selectedDates: internalState.selectedDates,
     setMonth,
     setYear,

@@ -54,8 +54,16 @@ export const getNewDisplayTimePeriods = (newTimePeriod: string) => {
   };
 };
 
+export const getFocusableElements = (currentQuerySelector: HTMLElement | null) => {
+  return [
+    ...(currentQuerySelector?.querySelectorAll(
+      'a:not([disabled]):not([tabindex="-1"]), button:not([disabled]):not([tabindex="-1"]), input:not([disabled]):not([tabindex="-1"]), [tabindex]:not([disabled]):not([tabindex="-1"])',
+    ) || []),
+  ];
+};
+
 let uniqueId = 0;
-export function getUniqueId(prefix = 'rdhp-id-') {
+export function getUniqueId(prefix = 'rhdp-id-') {
   return `${prefix}${(uniqueId += 1)}`;
 }
 

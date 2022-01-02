@@ -8,9 +8,9 @@ describe('Close button control', () => {
 
   it('should close the datepicker when Enter is pressed', () => {
     cy.visitStory('tests--input');
-    cy.getId('btn-datepicker-icon').click();
+    cy.getId('btn-open-datepicker').click();
     cy.getId('btn-close').should('be.visible');
-    cy.getId('btn-day-2021-11-08').should('have.attr', 'aria-selected', 'true');
+    cy.getId('btn-day-2022-02-02').should('have.attr', 'aria-selected', 'true');
     cy.realPress(['Shift', 'Tab']);
     cy.realPress(['Shift', 'Tab']);
     cy.realPress(['Shift', 'Tab']);
@@ -22,9 +22,9 @@ describe('Close button control', () => {
   });
 
   it('should not change the value when closed with the Enter key', () => {
-    cy.getId('btn-datepicker-icon').click();
+    cy.getId('btn-open-datepicker').click();
     cy.getId('btn-close').should('be.visible');
-    cy.getId('btn-day-2021-11-08').should('have.attr', 'aria-selected', 'true');
+    cy.getId('btn-day-2022-02-02').should('have.attr', 'aria-selected', 'true');
   });
 });
 
