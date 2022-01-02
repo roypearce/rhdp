@@ -4,6 +4,7 @@
 
 A React Hook based primitive to build simple, flexible datepicker components that are WAI-ARIA compliant, and support localization.
 
+<img src="https://badge.fury.io/js/rhdp.svg" alt="rhdp npm version" />
 <img src="https://img.badgesize.io/roypearce/rhdp/main/dist/module.js.svg?compression=brotli&label=module size (brotli)"/>
 <img src="https://img.badgesize.io/roypearce/rhdp/main/dist/module.js.svg?compression=gzip&label=module size (gzip)"/>
 <img src="https://img.badgesize.io/roypearce/rhdp/main/dist/module.js.svg?label=module size (uncompressed)"/>
