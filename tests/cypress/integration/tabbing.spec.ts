@@ -1,6 +1,38 @@
 import ChainDate from '../../../src/chain-date';
 
 describe('Tabbing', () => {
+  it('should create a focus trap if hasFocusTrap is set', () => {
+    cy.visitStory('tests--input');
+    cy.getId('div-datepicker').should('not.exist');
+    cy.getId('btn-open-datepicker').click();
+    cy.getId('div-datepicker').should('be.visible');
+    cy.getId('btn-day-2022-02-02').should('have.focus');
+    cy.realPress(['Shift', 'Tab']);
+    cy.getId('btn-next-year').should('have.focus');
+    cy.realPress(['Shift', 'Tab']);
+    cy.getId('btn-next-month').should('have.focus');
+    cy.realPress(['Shift', 'Tab']);
+    cy.getId('btn-previous-month').should('have.focus');
+    cy.realPress(['Shift', 'Tab']);
+    cy.getId('btn-previous-year').should('have.focus');
+    cy.realPress(['Shift', 'Tab']);
+    cy.getId('btn-close').should('have.focus');
+    cy.realPress(['Shift', 'Tab']);
+    cy.getId('btn-day-2022-02-02').should('have.focus');
+    cy.realPress('Tab');
+    cy.getId('btn-close').should('have.focus');
+    cy.realPress('Tab');
+    cy.getId('btn-previous-year').should('have.focus');
+    cy.realPress('Tab');
+    cy.getId('btn-previous-month').should('have.focus');
+    cy.realPress('Tab');
+    cy.getId('btn-next-month').should('have.focus');
+    cy.realPress('Tab');
+    cy.getId('btn-next-year').should('have.focus');
+    cy.realPress('Tab');
+    cy.getId('btn-day-2022-02-02').should('have.focus');
+  });
+
   it('should tab from first button to the calendar and then to the last button', () => {
     cy.visitStory('tests--single-date-preselected');
     cy.getId('btn-focus-start').focus();

@@ -74,6 +74,14 @@ body {
   margin: 20px;
   padding: 16px;
   position: relative;
+  background-color: #fff;
+}
+
+.datepicker-popover {
+  position: absolute;
+  margin: 0;
+  margin-top: 20px;
+  z-index: 1;
 }
 
 .month-year-title-container {
@@ -84,6 +92,7 @@ body {
 .month-year-title {
   font-size: 1.75rem;
   font-weight: bold;
+  line-height: 1.1;
 }
 
 .day-container {
@@ -96,6 +105,7 @@ body {
   position: relative;
   margin: 1px 0;
   outline: 0;
+  z-index: 1;
 }
 .day-container:before,
 .day-container:after {
@@ -106,7 +116,6 @@ body {
   left: 0;
   right: 0;
   z-index: -1;
-  box-shadow: inset 0 0 0 1px #fff;
 }
 .day-container:hover {
   box-shadow: inset 0 0 4px #000;

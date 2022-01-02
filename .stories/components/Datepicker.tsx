@@ -10,13 +10,14 @@ const Datepicker = ({
   blockedDates,
   datepickerMethods,
   focusOnInit,
-  onClose,
+  hasFocusTrap,
   labels,
   locale,
   maxDate,
   minDate,
   mode,
   onChange,
+  onClose,
   selectDates,
   weekStart,
 }: DatepickerProps) => {
@@ -25,19 +26,22 @@ const Datepicker = ({
     displayDaysOfTheWeek,
     displayMonth,
     displayYear,
+    focusedDate,
     getCalendarContainerProps,
     getCalendarWeekContainerProps,
     getDayOfTheWeekProps,
     getDaysOfTheWeekContainerProps,
-    getOnCloseButtonProps,
     getControlsContainerProps,
     getDatepickerContainerProps,
     getDayButtonProps,
     getMonthYearContainerProps,
     getNextMonthButtonProps,
+    getOnCloseButtonProps,
     getPreviousMonthButtonProps,
     getNextYearButtonProps,
     getPreviousYearButtonProps,
+    hoveredDate,
+    id,
     selectedDates,
     setMonth,
     setYear,
@@ -45,12 +49,13 @@ const Datepicker = ({
   } = useDatepicker({
     blockedDates,
     focusOnInit,
-    onClose,
+    hasFocusTrap,
     labels,
     locale,
     maxDate,
     minDate,
     mode,
+    onClose,
     selectDates,
     onChange,
     weekStart,
@@ -180,7 +185,11 @@ const Datepicker = ({
   };
 
   return (
-    <div className="datepicker-container" data-testid="div-datepicker" {...getDatepickerContainerProps()}>
+    <div
+      className={`datepicker-container ${onClose ? 'datepicker-popover' : ''}`}
+      data-testid="div-datepicker"
+      {...getDatepickerContainerProps()}
+    >
       {onClose && (
         <div className="close-container">
           <button

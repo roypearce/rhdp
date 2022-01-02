@@ -1,6 +1,7 @@
-import ChainDate, { TimePeriod } from '../../../src/chain-date';
+import ChainDate from '../../../src/chain-date';
 
 const firstDayOfMonth = new ChainDate().startOfMonth().format();
+const today = new ChainDate().format();
 
 describe('Show/hide functionality', () => {
   it('should focus on init if that prop is set', () => {
@@ -9,7 +10,7 @@ describe('Show/hide functionality', () => {
     cy.getId('div-datepicker').should('not.exist');
     cy.getId('btn-show-hide-single').click();
     cy.getId('div-datepicker').should('exist').should('be.visible');
-    cy.getId('btn-day-2021-11-08').should('have.focus');
+    cy.getId(`btn-day-${today}`).should('have.focus');
   });
 
   it('should focus on the element that had focus before it was shown', () => {

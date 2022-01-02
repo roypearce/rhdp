@@ -1,5 +1,6 @@
-import { ReactNode, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { DateSelectionMode, SelectedDates, WeekStart } from '../../src/types';
+import { isDateValid } from '../../src/util';
 import Datepicker from '../components/Datepicker';
 
 export default {
@@ -30,6 +31,7 @@ const BaseTestingComponent = ({
     <div>
       <button
         autoFocus={true}
+        className="btn btn-primary mr-1 my-1"
         data-testid="btn-focus-start"
         onClick={console.clear}
         style={{ marginBottom: '20px' }}
@@ -38,7 +40,12 @@ const BaseTestingComponent = ({
         Focus Point
       </button>
       {datepicker}
-      <button data-testid="btn-focus-end" style={{ marginTop: '20px' }} type="button">
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-focus-end"
+        style={{ marginTop: '20px' }}
+        type="button"
+      >
         Focus Point
       </button>
       <div style={{ marginTop: '20px' }}>
@@ -139,7 +146,11 @@ export const BlockedDates = () => {
 
   const additionalControls = (
     <>
-      <button data-testid="btn-set-blocked-dates" onClick={() => setBlockedDates(['2021-11-10'])}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-blocked-dates"
+        onClick={() => setBlockedDates(['2021-11-10'])}
+      >
         Set blockedDates to ['2021-11-10']
       </button>
     </>
@@ -196,7 +207,11 @@ export const LocalePreselected = () => {
 
   const additionalControls = (
     <>
-      <button data-testid="btn-set-locale-fr-fr" onClick={() => setLocale('fr-FR')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-locale-fr-fr"
+        onClick={() => setLocale('fr-FR')}
+      >
         Switch to French
       </button>
     </>
@@ -228,10 +243,18 @@ export const MaxDate = () => {
 
   const additionalControls = (
     <>
-      <button data-testid="btn-set-max-date-2022-01-08" onClick={() => setMaxDate('2022-01-08')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-max-date-2022-01-08"
+        onClick={() => setMaxDate('2022-01-08')}
+      >
         Set maxDate to 2022-01-08
       </button>
-      <button data-testid="btn-set-max-date-2024-01-08" onClick={() => setMaxDate('2024-01-08')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-max-date-2024-01-08"
+        onClick={() => setMaxDate('2024-01-08')}
+      >
         Set maxDate to 2024-01-08
       </button>
     </>
@@ -265,10 +288,18 @@ export const MinDate = () => {
 
   const additionalControls = (
     <>
-      <button data-testid="btn-set-min-date-2021-08-08" onClick={() => setMinDate('2021-08-08')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-min-date-2021-08-08"
+        onClick={() => setMinDate('2021-08-08')}
+      >
         Set minDate to 2021-08-08
       </button>
-      <button data-testid="btn-set-min-date-2019-08-08" onClick={() => setMinDate('2019-08-08')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-min-date-2019-08-08"
+        onClick={() => setMinDate('2019-08-08')}
+      >
         Set minDate to 2019-08-08
       </button>
     </>
@@ -349,29 +380,46 @@ export const NoDateSelected = () => {
 
   const additionalControls = (
     <>
-      <button data-testid="btn-set-mode-single" onClick={() => setMode('single')}>
+      <button className="btn btn-primary mr-1 my-1" data-testid="btn-set-mode-single" onClick={() => setMode('single')}>
         Set mode to single
       </button>
-      <button data-testid="btn-set-mode-range" onClick={() => setMode('range')}>
+      <button className="btn btn-primary mr-1 my-1" data-testid="btn-set-mode-range" onClick={() => setMode('range')}>
         Set mode to range
       </button>
-      <button data-testid="btn-set-mode-multiple" onClick={() => setMode('multiple')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-mode-multiple"
+        onClick={() => setMode('multiple')}
+      >
         Set mode to multiple
       </button>
-      <button data-testid="btn-set-mode-max-3" onClick={() => setMode(3)}>
+      <button className="btn btn-primary mr-1 my-1" data-testid="btn-set-mode-max-3" onClick={() => setMode(3)}>
         Set mode to multiple, max of 3
       </button>
       <br />
-      <button data-testid="btn-set-select-dates-null" onClick={() => setSelectDates(null)}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-select-dates-null"
+        onClick={() => setSelectDates(null)}
+      >
         Set selectDates to null
       </button>
-      <button data-testid="btn-set-select-dates-string" onClick={() => setSelectDates('2021-11-29')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-select-dates-string"
+        onClick={() => setSelectDates('2021-11-29')}
+      >
         Set selectDates to '2021-11-29'
       </button>
-      <button data-testid="btn-set-select-dates-range" onClick={() => setSelectDates(['2021-11-20', '2021-11-26'])}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-select-dates-range"
+        onClick={() => setSelectDates(['2021-11-20', '2021-11-26'])}
+      >
         Set selectDates to ['2021-11-20', '2021-11-26']
       </button>
       <button
+        className="btn btn-primary mr-1 my-1"
         data-testid="btn-set-select-dates-multiple"
         onClick={() => setSelectDates(['2021-11-10', '2021-11-20', '2021-11-30'])}
       >
@@ -429,35 +477,53 @@ export const SingleDatePreselected = () => {
   const datepickerMethods = useRef<{ setMonth(month: number): void; setYear(year: number): void }>();
   const additionalControls = (
     <>
-      <button data-testid="btn-set-mode-single" onClick={() => setMode('single')}>
+      <button className="btn btn-primary mr-1 my-1" data-testid="btn-set-mode-single" onClick={() => setMode('single')}>
         Set mode to single
       </button>
-      <button data-testid="btn-set-mode-range" onClick={() => setMode('range')}>
+      <button className="btn btn-primary mr-1 my-1" data-testid="btn-set-mode-range" onClick={() => setMode('range')}>
         Set mode to range
       </button>
-      <button data-testid="btn-set-mode-multiple" onClick={() => setMode('multiple')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-mode-multiple"
+        onClick={() => setMode('multiple')}
+      >
         Set mode to multiple
       </button>
-      <button data-testid="btn-set-mode-max-3" onClick={() => setMode(3)}>
+      <button className="btn btn-primary mr-1 my-1" data-testid="btn-set-mode-max-3" onClick={() => setMode(3)}>
         Set mode to multiple, max of 3
       </button>
       <br />
-      <button data-testid="btn-set-select-dates-null" onClick={() => setSelectDates(null)}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-select-dates-null"
+        onClick={() => setSelectDates(null)}
+      >
         Set selectDates to null
       </button>
-      <button data-testid="btn-set-select-dates-string" onClick={() => setSelectDates('2021-11-29')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-select-dates-string"
+        onClick={() => setSelectDates('2021-11-29')}
+      >
         Set selectDates to '2021-11-29'
       </button>
-      <button data-testid="btn-set-select-dates-range" onClick={() => setSelectDates(['2021-11-20', '2021-11-26'])}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-select-dates-range"
+        onClick={() => setSelectDates(['2021-11-20', '2021-11-26'])}
+      >
         Set selectDates to ['2021-11-20', '2021-11-26']
       </button>
       <button
+        className="btn btn-primary mr-1 my-1"
         data-testid="btn-set-select-dates-multiple"
         onClick={() => setSelectDates(['2021-11-10', '2021-11-20', '2021-11-30'])}
       >
         Set selectDates to ['2021-11-10', '2021-11-20', '2021-11-30']
       </button>
       <button
+        className="btn btn-primary mr-1 my-1"
         data-testid="btn-set-select-dates-many-multiple"
         onClick={() =>
           setSelectDates([
@@ -477,19 +543,32 @@ export const SingleDatePreselected = () => {
         Set selectDates to ['2021-11-10', '2021-11-11', '2021-11-12', '2021-11-13', '2021-11-14', '2021-11-15',
         '2021-11-16', '2021-11-17', '2021-11-18', '2021-11-19']
       </button>
-      <button data-testid="btn-set-select-dates-invalid" onClick={() => setSelectDates('2o2l-ll-lo')}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-select-dates-invalid"
+        onClick={() => setSelectDates('2o2l-ll-lo')}
+      >
         Set selectDates to 2o2l-ll-lo
       </button>
       <button
+        className="btn btn-primary mr-1 my-1"
         data-testid="btn-set-select-dates-multiple-with-invalid"
         onClick={() => setSelectDates(['2o2l-ll-lo', '2021-11-10', '2021-11-11', '2021-11-12'])}
       >
         Set selectDates to ['2o2l-ll-lo','2021-11-10', '2021-11-11', '2021-11-12']
       </button>
-      <button data-testid="btn-set-month-february" onClick={() => datepickerMethods.current.setMonth(2)}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-month-february"
+        onClick={() => datepickerMethods.current.setMonth(2)}
+      >
         Set Month to February
       </button>
-      <button data-testid="btn-set-year-2024" onClick={() => datepickerMethods.current.setYear(2024)}>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-year-2024"
+        onClick={() => datepickerMethods.current.setYear(2024)}
+      >
         Set Year to 2024
       </button>
     </>
@@ -545,10 +624,10 @@ export const WeekStartPreselected = () => {
 
   const additionalControls = (
     <>
-      <button data-testid="btn-set-week-start-0" onClick={() => setWeekStart(0)}>
+      <button className="btn btn-primary mr-1 my-1" data-testid="btn-set-week-start-0" onClick={() => setWeekStart(0)}>
         Switch to Sunday
       </button>
-      <button data-testid="btn-set-week-start-1" onClick={() => setWeekStart(1)}>
+      <button className="btn btn-primary mr-1 my-1" data-testid="btn-set-week-start-1" onClick={() => setWeekStart(1)}>
         Switch to Monday
       </button>
     </>
@@ -584,14 +663,14 @@ export const ShowHide = () => {
 
   return (
     <div>
-      <div>
+      <div style={{ marginBottom: '20px' }}>
         <button
           autoFocus={true}
+          className="btn btn-primary mr-1 my-1"
           data-testid="btn-show-hide-single"
           onClick={() => {
             setSingleDatepickerVisible(!isSingleDatepickerVisible);
           }}
-          style={{ marginBottom: '20px' }}
           type="button"
         >
           {isSingleDatepickerVisible ? 'Hide' : 'Show'} single datepicker
@@ -600,23 +679,23 @@ export const ShowHide = () => {
         {isSingleDatepickerVisible && (
           <Datepicker
             focusOnInit={true}
+            hasFocusTrap={true}
             onClose={() => setSingleDatepickerVisible(false)}
             labels={labels}
             mode="single"
             onChange={(newDate) => {
               console.log('Got a new date', newDate);
             }}
-            selectDates="2021-11-08"
           />
         )}
       </div>
-      <div>
+      <div style={{ marginBottom: '20px' }}>
         <button
+          className="btn btn-primary mr-1 my-1"
           data-testid="btn-show-hide-range"
           onClick={() => {
             setRangeDatepickerVisible(!isRangeDatepickerVisible);
           }}
-          style={{ marginBottom: '20px' }}
           type="button"
         >
           {isRangeDatepickerVisible ? 'Hide' : 'Show'} range datepicker
@@ -625,6 +704,7 @@ export const ShowHide = () => {
         {isRangeDatepickerVisible && (
           <Datepicker
             focusOnInit={true}
+            hasFocusTrap={true}
             onClose={() => setRangeDatepickerVisible(false)}
             labels={labels}
             mode="range"
@@ -634,13 +714,13 @@ export const ShowHide = () => {
           />
         )}
       </div>
-      <div>
+      <div style={{ marginBottom: '20px' }}>
         <button
+          className="btn btn-primary mr-1 my-1"
           data-testid="btn-show-hide-multiple"
           onClick={() => {
             setMultipleDatepickerVisible(!isMultipleDatepickerVisible);
           }}
-          style={{ marginBottom: '20px' }}
           type="button"
         >
           {isMultipleDatepickerVisible ? 'Hide' : 'Show'} multiple datepicker
@@ -649,6 +729,7 @@ export const ShowHide = () => {
         {isMultipleDatepickerVisible && (
           <Datepicker
             focusOnInit={true}
+            hasFocusTrap={true}
             onClose={() => setMultipleDatepickerVisible(false)}
             labels={labels}
             mode="multiple"
@@ -658,13 +739,13 @@ export const ShowHide = () => {
           />
         )}
       </div>
-      <div>
+      <div style={{ marginBottom: '20px' }}>
         <button
+          className="btn btn-primary mr-1 my-1"
           data-testid="btn-show-hide-multiple-max"
           onClick={() => {
             setMultipleMaxDatepickerVisible(!isMultipleMaxDatepickerVisible);
           }}
-          style={{ marginBottom: '20px' }}
           type="button"
         >
           {isMultipleMaxDatepickerVisible ? 'Hide' : 'Show'} multiple max datepicker
@@ -673,6 +754,7 @@ export const ShowHide = () => {
         {isMultipleMaxDatepickerVisible && (
           <Datepicker
             focusOnInit={true}
+            hasFocusTrap={true}
             onClose={() => setMultipleMaxDatepickerVisible(false)}
             labels={labels}
             mode={4}
@@ -686,54 +768,99 @@ export const ShowHide = () => {
   );
 };
 
+const convertUSDateToISO = (date) => {
+  const [month, day, year] = date?.split('/');
+  if (year && month && day) {
+    return `${year}-${month}-${day}`;
+  }
+  return null;
+};
+
 export const Input = () => {
-  const [selectedDate, setSelectedDate] = useState<SelectedDates>('2021-11-08');
-  const [displayDate, setDisplayDate] = useState<string>();
+  const [selectedDate, setSelectedDate] = useState<SelectedDates>();
+  const [displayDate, setDisplayDate] = useState<string>('');
   const [isDatepickerOpen, setIsDatepickerOpen] = useState(false);
+  const [invalid, setInvalid] = useState(true);
+
+  useEffect(() => {
+    const isoDate = convertUSDateToISO(displayDate);
+    const target = document.getElementById('datepicker-input');
+    const isValid = isDateValid(isoDate);
+    setInvalid(!isValid);
+    if (isValid) {
+      setSelectedDate(isoDate);
+      (target as HTMLInputElement)?.setCustomValidity('');
+    } else {
+      (target as HTMLInputElement)?.setCustomValidity('error');
+    }
+    (target as HTMLInputElement)?.checkValidity();
+  }, [displayDate]);
+
+  useEffect(() => {
+    setDisplayDate('02/02/2022');
+  }, []);
 
   return (
-    <div>
-      <label htmlFor="datepicker-input">Select a date</label>
-      <br />
-      <input
-        defaultValue={displayDate}
-        id="datepicker-input"
-        onChange={(evt) => {
-          const [month, day, year] = evt.target.value.match(/\d+/g) || ['', '', ''];
-          setDisplayDate(evt.target.value);
-          setSelectedDate(`${year}-${month}-${day}`);
-        }}
-        placeholder="mm/dd/yyyy"
-        type="text"
-      />
+    <div className="App m-4">
+      <div className="form-group position-relative" style={{ maxWidth: '220px' }}>
+        <label htmlFor="datepicker-input">Select a date (mm/dd/yyyy format)</label>
+        <div className="input-group was-validated">
+          <input
+            aria-describedby="invalid-date-format"
+            aria-invalid={invalid}
+            className="form-control"
+            id="datepicker-input"
+            onChange={(evt) => {
+              setDisplayDate(evt.target.value);
+            }}
+            placeholder="mm/dd/yyyy"
+            type="text"
+            value={displayDate}
+          />
+          <div className="input-group-append">
+            <button
+              aria-describedby={`${invalid ? 'datepicker-input' : ''}`}
+              aria-haspopup={true}
+              aria-label="Open datepicker"
+              className="btn btn-primary input-group-text"
+              data-testid="btn-open-datepicker"
+              onClick={() => setIsDatepickerOpen(!isDatepickerOpen)}
+              type="button"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-calendar3"
+                viewBox="0 0 16 16"
+              >
+                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        {invalid && (
+          <div id="invalid-date-format" role="alert">
+            Date should be in mm/dd/yyyy format
+          </div>
+        )}
 
-      <button data-testid="btn-datepicker-icon" onClick={() => setIsDatepickerOpen(!isDatepickerOpen)} type="button">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          fill="currentColor"
-          className="bi bi-calendar"
-          viewBox="0 0 16 16"
-        >
-          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-        </svg>
-      </button>
-
-      {isDatepickerOpen && (
-        <Datepicker
-          focusOnInit={true}
-          onChange={(newDate) => {
-            const [year, month, day] = (newDate as string).match(/\d+/g) || ['', '', ''];
-            if (year && month && day) {
+        {isDatepickerOpen && (
+          <Datepicker
+            focusOnInit={true}
+            hasFocusTrap={true}
+            onChange={(newDate) => {
+              const [year, month, day] = (newDate as string).match(/\d+/g) || ['', '', ''];
               setDisplayDate(`${month}/${day}/${year}`);
-            }
-            setSelectedDate(newDate);
-          }}
-          onClose={() => setIsDatepickerOpen(false)}
-          selectDates={selectedDate as SelectedDates}
-        />
-      )}
+              setSelectedDate(newDate);
+            }}
+            onClose={() => setIsDatepickerOpen(false)}
+            selectDates={selectedDate as SelectedDates}
+          />
+        )}
+      </div>
     </div>
   );
 };

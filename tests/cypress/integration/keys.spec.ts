@@ -1,3 +1,7 @@
+import ChainDate from '../../../src/chain-date';
+
+const today = new ChainDate().format();
+
 describe('Key based navigation', () => {
   describe('Home navigation', () => {
     it('should go to the start of the month when Home is pressed', () => {
@@ -130,7 +134,7 @@ describe('Key based navigation', () => {
       cy.getId('div-datepicker').should('not.exist');
       cy.getId('btn-show-hide-single').click();
       cy.getId('div-datepicker').should('exist').should('be.visible');
-      cy.getId('btn-day-2021-11-08').should('have.focus');
+      cy.getId(`btn-day-${today}`).should('have.focus');
       cy.realPress('Escape');
       cy.getId('div-datepicker').should('not.exist');
     });
