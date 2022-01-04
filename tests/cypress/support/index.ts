@@ -14,6 +14,7 @@
 // ***********************************************************
 import './commands';
 import 'cypress-real-events/support';
+import '@cypress/code-coverage/support';
 
 declare global {
   namespace Cypress {
