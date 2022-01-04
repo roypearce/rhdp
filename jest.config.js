@@ -1,8 +1,9 @@
 /** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-  testMatch: [
-    "**/tests/unit/**/*.ts"
-  ],
+  collectCoverage: true,
+  coverageDirectory: 'coverage-jest',
+  coverageReporters: ['json'],
+  testMatch: ['**/tests/unit/**/*.ts'],
   preset: 'ts-jest',
   testEnvironment: 'node',
 };
