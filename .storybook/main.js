@@ -9,4 +9,8 @@ module.exports = {
       },
     },
   ],
+  babel: async (options) => ({
+    ...options,
+    plugins: ['istanbul', ...options.plugins],
+  }),
 };

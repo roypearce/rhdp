@@ -1,2 +1,7 @@
 node_modules
 storybook-static
+.nyc_output
+coverage-combined
+coverage
+coverage-jest
+instrumented
