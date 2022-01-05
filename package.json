@@ -35,7 +35,7 @@
   "scripts": {
     "build": "rollup -c && tsc",
     "coverage": "yarn run coverage:instrument && yarn run test:e2e-headless && yarn run test:unit && npx nyc report && yarn run coverage:final",
-    "coverage:combine": "cp npx nyc merge coverage-combined && mv coverage.json .nyc_output/out.json",
+    "coverage:combine": "npx nyc merge coverage-combined && mv coverage.json .nyc_output/out.json",
     "coverage:copy": "cp coverage/coverage-final.json coverage-combined/cypress.json && cp coverage-jest/coverage-final.json coverage-combined/jest.json",
     "coverage:final": "node --experimental-json-modules ./nyc-summary.mjs",
     "coverage:instrument": "npx nyc instrument --compact=false src instrumented",

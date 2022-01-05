@@ -6,7 +6,7 @@ const main = () => {
     './nyc-total.json',
     JSON.stringify({
       branches: json.total.branches.pct,
-      functions: json.total.branches.pct,
+      functions: json.total.functions.pct,
       lines: json.total.lines.pct,
       statements: json.total.statements.pct,
     }),
