@@ -3,5 +3,5 @@ storybook-static
 .nyc_output
 coverage-combined
 coverage
-coverage-jest
+coverage-json
 instrumented
