@@ -881,7 +881,7 @@ export const BrokenMinMaxDate = () => {
       </button>
       <button
         className="btn btn-primary mr-1 my-1"
-        data-testid="btn-set-date-after-min"
+        data-testid="btn-set-date-after-max"
         onClick={() => setSelectDates('2021-11-30')}
       >
         Set date to 2021-11-30

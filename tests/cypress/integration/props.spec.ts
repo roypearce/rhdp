@@ -48,6 +48,29 @@ describe('selectDates prop values', () => {
     cy.getId('btn-set-mode-max-3').click();
     cy.getId('div-dates-selected').should('have.text', '2021-11-10');
   });
+
+  it('should not change the month/year if selectDates is changed and all dates are invalid because they are before minDate', () => {
+    cy.visitStory('tests--broken-min-max-date');
+    cy.getId('div-month-year-title').should('contain', 'November 2021');
+    cy.getId('btn-day-2021-11-08').should('have.attr', 'aria-selected', 'true');
+    cy.getId('btn-set-date-before-min').click();
+    cy.getId('div-month-year-title').should('contain', 'November 2021');
+    cy.realPress(['Shift', 'Tab']);
+    cy.realPress(['Shift', 'Tab']);
+    cy.getId('btn-day-2021-11-08').should('have.focus').should('not.have.attr', 'aria-selected');
+  });
+
+  it('should not change the month/year if selectDates is changed and all dates are invalid because they are after maxDate', () => {
+    cy.visitStory('tests--broken-min-max-date');
+    cy.getId('div-month-year-title').should('contain', 'November 2021');
+    cy.getId('btn-day-2021-11-08').should('have.attr', 'aria-selected', 'true');
+    cy.getId('btn-set-date-after-max').click();
+    cy.getId('div-month-year-title').should('contain', 'November 2021');
+    cy.realPress(['Shift', 'Tab']);
+    cy.realPress(['Shift', 'Tab']);
+    cy.realPress(['Shift', 'Tab']);
+    cy.getId('btn-day-2021-11-08').should('have.focus').should('not.have.attr', 'aria-selected');
+  });
 });
 
 describe('selectDates prop modified after initial render', () => {

@@ -199,6 +199,10 @@ export const useDatepicker = ({
         }
     }
 
+    if (!datesToAdd.length) {
+      resetDisplayMonth = false;
+    }
+
     selectedDatesMap = {};
     if (newDates) {
       newDates.forEach((newDate) => {
