@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import { DateSelectionMode, SelectedDates, WeekStart } from '../../src/types';
 import { isDateValid } from '../../src/util';
 import Datepicker from '../components/Datepicker';
+import BrokenDatepicker from '../components/BrokenDatepicker';
 
 export default {
   title: 'Tests',
@@ -862,5 +863,49 @@ export const Input = () => {
         )}
       </div>
     </div>
+  );
+};
+
+export const BrokenMinMaxDate = () => {
+  const [selectDates, setSelectDates] = useState('2021-11-08');
+  const [datesSelected, setDatesSelected] = useState<SelectedDates>(selectDates);
+
+  const additionalControls = (
+    <>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-date-before-min"
+        onClick={() => setSelectDates('2021-11-01')}
+      >
+        Set date to 2021-11-01
+      </button>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-date-after-min"
+        onClick={() => setSelectDates('2021-11-30')}
+      >
+        Set date to 2021-11-30
+      </button>
+    </>
+  );
+
+  return (
+    <BaseTestingComponent
+      additionalControls={additionalControls}
+      datepicker={
+        <BrokenDatepicker
+          maxDate="2021-11-28"
+          minDate="2021-11-07"
+          labels={labels}
+          mode="single"
+          onChange={(newDates) => {
+            console.log('Got new dates', newDates);
+            setDatesSelected(newDates);
+          }}
+          selectDates={selectDates}
+        />
+      }
+      datesSelected={datesSelected}
+    />
   );
 };
