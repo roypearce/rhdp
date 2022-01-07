@@ -2,6 +2,8 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 import { DateSelectionMode, SelectedDates, WeekStart } from '../../src/types';
 import { isDateValid } from '../../src/util';
 import Datepicker from '../components/Datepicker';
+import BrokenDatepicker from '../components/BrokenDatepicker';
+import ChainDate, { TimePeriod } from '../../src/chain-date';
 
 export default {
   title: 'Tests',
@@ -143,6 +145,28 @@ export const BlockedDates = () => {
     '2022-02-11',
     '2022-02-12',
   ]);
+  const initialDate = new ChainDate('2021-11-09');
+  const sixWeeks = 42;
+  const forwardDates = useRef([]);
+  const backDates = useRef([]);
+
+  useEffect(() => {
+    for (let i = 1; i <= sixWeeks; i += 1) {
+      console.log(i, initialDate.clone().add(i, TimePeriod.Day).format());
+      forwardDates.current.push(initialDate.clone().add(i, TimePeriod.Day).format());
+      backDates.current.push(
+        initialDate
+          .clone()
+          .add(i * -1, TimePeriod.Day)
+          .format(),
+      );
+    }
+  }, []);
+
+  const [selectDates, setSelectDates] = useState<SelectedDates>(initialDate.format());
+  const [maxDate, setMaxDate] = useState('2022-02-13');
+  const [minDate, setMinDate] = useState(null);
+  const [mode, setMode] = useState<DateSelectionMode>('single');
 
   const additionalControls = (
     <>
@@ -153,10 +177,67 @@ export const BlockedDates = () => {
       >
         Set blockedDates to ['2021-11-10']
       </button>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-mode-multiple"
+        onClick={() => {
+          setMode('multiple');
+        }}
+      >
+        Set mode to multiple
+      </button>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-multiple-dates"
+        onClick={() => {
+          setSelectDates(['2020-11-12', '2021-11-13', '2022-11-11']);
+        }}
+      >
+        Set selectedDates to ['2020-11-10','2021-11-10','2022-11-10'] Bug with this where it doesn't focus the first
+        date when it sets the dates like this
+      </button>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-max-date-to-null"
+        onClick={() => {
+          setMaxDate(null);
+        }}
+      >
+        Set maxDate to null
+      </button>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-min-date-to-date"
+        onClick={() => {
+          setMinDate('2021-09-01');
+        }}
+      >
+        Set minDate to 2021-09-01
+      </button>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-forward-dates-full"
+        onClick={() => {
+          console.log(forwardDates.current);
+          setBlockedDates(forwardDates.current);
+        }}
+      >
+        Set forward blocked dates to full 6 weeks
+      </button>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-forward-dates-full-minus-one"
+        onClick={() => {
+          const blockedDates = [...forwardDates.current];
+          blockedDates.length = sixWeeks - 1;
+          setBlockedDates(blockedDates);
+        }}
+      >
+        Set forward blocked dates to 5 weeks 6 days
+      </button>
     </>
   );
 
-  const selectDates = '2021-11-09';
   const [datesSelected, setDatesSelected] = useState<SelectedDates>(selectDates);
 
   return (
@@ -166,8 +247,9 @@ export const BlockedDates = () => {
         <Datepicker
           blockedDates={blockedDates}
           labels={labels}
-          maxDate="2022-02-13"
-          mode="single"
+          maxDate={maxDate}
+          minDate={minDate}
+          mode={mode}
           onChange={(newDates) => {
             console.log('Got new dates', newDates);
             setDatesSelected(newDates);
@@ -862,5 +944,49 @@ export const Input = () => {
         )}
       </div>
     </div>
+  );
+};
+
+export const BrokenMinMaxDate = () => {
+  const [selectDates, setSelectDates] = useState('2021-11-08');
+  const [datesSelected, setDatesSelected] = useState<SelectedDates>(selectDates);
+
+  const additionalControls = (
+    <>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-date-before-min"
+        onClick={() => setSelectDates('2021-11-01')}
+      >
+        Set date to 2021-11-01
+      </button>
+      <button
+        className="btn btn-primary mr-1 my-1"
+        data-testid="btn-set-date-after-max"
+        onClick={() => setSelectDates('2021-11-30')}
+      >
+        Set date to 2021-11-30
+      </button>
+    </>
+  );
+
+  return (
+    <BaseTestingComponent
+      additionalControls={additionalControls}
+      datepicker={
+        <BrokenDatepicker
+          maxDate="2021-11-28"
+          minDate="2021-11-07"
+          labels={labels}
+          mode="single"
+          onChange={(newDates) => {
+            console.log('Got new dates', newDates);
+            setDatesSelected(newDates);
+          }}
+          selectDates={selectDates}
+        />
+      }
+      datesSelected={datesSelected}
+    />
   );
 };

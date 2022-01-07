@@ -3,6 +3,74 @@ import ChainDate from '../../../src/chain-date';
 const today = new ChainDate().format();
 
 describe('Key based navigation', () => {
+  describe('Path finding', () => {
+    it('should not navigate beyond max search date (6 weeks) from current date if no dates are available', () => {
+      cy.visitStory('tests--blocked-dates');
+      cy.getId('btn-set-max-date-to-null').click();
+      cy.getId('btn-set-forward-dates-full').click();
+      cy.getId('btn-day-2021-11-09').click().should('have.focus');
+      cy.realPress('ArrowRight');
+      cy.getId('btn-day-2021-11-09').should('have.focus');
+      cy.realPress('ArrowDown');
+      cy.getId('btn-day-2021-11-09').should('have.focus');
+    });
+
+    it('should allow navigation backwards beyond 6 weeks if there is a selected date before that', () => {
+      cy.getId('btn-next-month').click();
+      cy.realPress('Tab');
+      cy.realPress('Tab');
+      cy.getId('btn-day-2021-12-09').should('have.focus').should('have.attr', 'aria-disabled', 'true');
+      cy.realPress('ArrowRight');
+      cy.getId('btn-day-2021-12-22').should('have.focus');
+      cy.realPress('ArrowLeft');
+      cy.getId('btn-day-2021-11-09').should('have.focus');
+      cy.realPress('ArrowRight');
+      cy.getId('btn-day-2021-11-09').should('have.focus');
+    });
+
+    it('should not allow navigation beyond 6 weeks if that date is no longer selected', () => {
+      cy.getId('btn-next-month').click();
+      cy.realPress('Tab');
+      cy.realPress('Tab');
+      cy.getId('btn-day-2021-12-09').should('have.focus').should('have.attr', 'aria-disabled', 'true');
+      cy.realPress('ArrowRight');
+      cy.getId('btn-day-2021-12-22').should('have.focus').click();
+      cy.realPress('ArrowLeft');
+      cy.getId('btn-day-2021-12-22').should('have.focus');
+      cy.realPress('ArrowUp');
+      cy.getId('btn-day-2021-12-22').should('have.focus');
+    });
+
+    it('should allow navigation forwards beyond 6 weeks if there is a selected date after that', () => {
+      cy.getId('btn-previous-month').click();
+      cy.realPress('Tab');
+      cy.realPress('Tab');
+      cy.realPress('Tab');
+      cy.getId('btn-day-2021-11-22').should('have.focus').should('have.attr', 'aria-disabled', 'true');
+      cy.realPress('ArrowLeft');
+      cy.getId('btn-day-2021-11-09').should('have.focus');
+      cy.realPress('ArrowRight');
+      cy.getId('btn-day-2021-12-22').should('have.focus');
+      cy.realPress('ArrowLeft');
+      cy.getId('btn-day-2021-12-22').should('have.focus');
+    });
+
+    it('should navigate to the next available day when max search date (6 weeks) minus one day is set from the current date', () => {
+      cy.visitStory('tests--blocked-dates');
+      cy.getId('btn-set-max-date-to-null').click();
+      cy.getId('btn-set-forward-dates-full-minus-one').click();
+      cy.getId('btn-day-2021-11-09').click().should('have.focus');
+      cy.realPress('ArrowRight');
+      cy.getId('btn-day-2021-12-21').should('have.focus');
+      cy.realPress('ArrowLeft');
+      cy.getId('btn-day-2021-11-09').should('have.focus');
+      cy.realPress('ArrowDown');
+      cy.getId('btn-day-2021-12-21').should('have.focus');
+      cy.realPress('ArrowUp');
+      cy.getId('btn-day-2021-11-09').should('have.focus');
+    });
+  });
+
   describe('Home navigation', () => {
     it('should go to the start of the month when Home is pressed', () => {
       cy.visitStory('tests--single-date-preselected');

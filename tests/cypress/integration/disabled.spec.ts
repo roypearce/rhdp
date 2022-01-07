@@ -27,6 +27,14 @@ describe('Disabed controls', () => {
         .realClick()
         .should('be.disabled');
     });
+
+    it('should have no effect if it is not disabled when minDate is within one month', () => {
+      cy.visitStory('tests--broken-min-max-date');
+      cy.getId('btn-previous-month').should('not.be.disabled');
+      cy.getId('div-month-year-title').should('contain', 'November 2021');
+      cy.getId('btn-previous-month').click();
+      cy.getId('div-month-year-title').should('contain', 'November 2021');
+    });
   });
 
   describe('Disabled next month button', () => {
@@ -40,6 +48,14 @@ describe('Disabed controls', () => {
         .should('not.be.disabled')
         .realClick()
         .should('be.disabled');
+    });
+
+    it('should have no effect if it is not disabled when minDate is within one month', () => {
+      cy.visitStory('tests--broken-min-max-date');
+      cy.getId('btn-next-month').should('not.be.disabled');
+      cy.getId('div-month-year-title').should('contain', 'November 2021');
+      cy.getId('btn-next-month').click();
+      cy.getId('div-month-year-title').should('contain', 'November 2021');
     });
   });
 
