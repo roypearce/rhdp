@@ -397,7 +397,7 @@ export const useDatepicker = ({
         dotwNum = possibleDateToFocus.getDay();
         searchPath = dotwSearchPaths[dotwNum];
         currentDateToTest = possibleDateToFocus.format();
-        while (!bestDateToFocus && currentDateToTest > minSearchDate && currentDateToTest < maxSearchDate) {
+        while (!bestDateToFocus && currentDateToTest >= minSearchDate && currentDateToTest <= maxSearchDate) {
           dotwIndexToFocus = searchPath.find((dayModifier) => {
             return isDateSelectable(
               possibleDateToFocus.clone().add(dayModifier, TimePeriod.Day).format(),
@@ -701,12 +701,8 @@ export const useDatepicker = ({
     const { calendarMonthEndDate, calendarMonthStartDate, focusedDate, lastFocusedDate } = internalRef.current;
     let dateToFocus = controlsFocused ? lastFocusedDate : focusedDate;
 
-    if (dateToFocus < calendarMonthStartDate || dateToFocus > calendarMonthEndDate) {
-      if (minDate && minDate >= calendarMonthStartDate && minDate <= calendarMonthEndDate) {
-        dateToFocus = minDate;
-      } else {
-        dateToFocus = calendarMonthStartDate;
-      }
+    if (!dateToFocus || dateToFocus < calendarMonthStartDate || dateToFocus > calendarMonthEndDate) {
+      dateToFocus = calendarMonthStartDate;
     }
 
     let newFocusedDate = '';
