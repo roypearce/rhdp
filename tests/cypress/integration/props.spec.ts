@@ -97,6 +97,12 @@ describe('selectDates prop modified after initial render', () => {
       cy.getId('div-dates-selected').should('have.text', '2021-11-20,2021-11-26');
     });
 
+    it('should let a new range of dates be selected when a current range already exists', () => {
+      cy.getId('btn-day-2021-11-10').click();
+      cy.getId('btn-day-2021-11-11').click();
+      cy.getId('div-dates-selected').should('have.text', '2021-11-10,2021-11-11');
+    });
+
     it('should allow the select dates to be modified back to null', () => {
       cy.getId('btn-set-select-dates-null').click();
       cy.getId('div-dates-selected').should('have.text', '');
