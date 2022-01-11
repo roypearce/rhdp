@@ -8,6 +8,7 @@ module.exports = {
         controls: false,
       },
     },
+    '@storybook/addon-a11y',
   ],
   babel: async (options) => ({
     ...options,
