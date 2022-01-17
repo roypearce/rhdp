@@ -121,7 +121,7 @@ describe('Disabed dates', () => {
     it('should not allow disabled dates to be selected with minDate set', () => {
       cy.visitStory('tests--min-date');
       cy.getId('btn-day-2021-11-06').realClick();
-      cy.getId('btn-day-2021-11-06').should('not.have.attr', 'aria-selected', 'true');
+      cy.getId('btn-day-2021-11-06').should('have.attr', 'aria-pressed', 'false');
       cy.getId('div-dates-selected').should('have.text', '2021-11-08');
     });
   });
@@ -174,7 +174,7 @@ describe('Disabed dates', () => {
   it('should not allow disabled dates to be selected with maxDate set', () => {
     cy.visitStory('tests--max-date');
     cy.getId('btn-day-2021-11-29').realClick();
-    cy.getId('btn-day-2021-11-29').should('not.have.attr', 'aria-selected', 'true');
+    cy.getId('btn-day-2021-11-29').should('have.attr', 'aria-pressed', 'false');
     cy.getId('div-dates-selected').should('have.text', '2021-11-08');
   });
 
@@ -224,10 +224,10 @@ describe('Disabed dates', () => {
 
     it('should not allow disabled dates to be selected with minDate and maxDate set', () => {
       cy.getId('btn-day-2021-11-06').realClick();
-      cy.getId('btn-day-2021-11-06').should('not.have.attr', 'aria-selected', 'true');
+      cy.getId('btn-day-2021-11-06').should('have.attr', 'aria-pressed', 'false');
       cy.getId('div-dates-selected').should('have.text', '2021-11-08');
       cy.getId('btn-day-2021-11-29').realClick();
-      cy.getId('btn-day-2021-11-29').should('not.have.attr', 'aria-selected', 'true');
+      cy.getId('btn-day-2021-11-29').should('have.attr', 'aria-pressed', 'false');
       cy.getId('div-dates-selected').should('have.text', '2021-11-08');
     });
   });

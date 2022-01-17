@@ -888,7 +888,7 @@ export const Input = () => {
         <label htmlFor="datepicker-input">Select a date (mm/dd/yyyy format)</label>
         <div className="input-group was-validated">
           <input
-            aria-describedby="invalid-date-format"
+            {...(invalid && { 'aria-describedby': 'invalid-date-format' })}
             aria-invalid={invalid}
             className="form-control"
             id="datepicker-input"
@@ -901,7 +901,7 @@ export const Input = () => {
           />
           <div className="input-group-append">
             <button
-              aria-describedby={`${invalid ? 'datepicker-input' : ''}`}
+              aria-describedby="datepicker-input"
               aria-haspopup={true}
               aria-label="Open datepicker"
               className="btn btn-primary input-group-text"
