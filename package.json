@@ -1,6 +1,6 @@
 {
   "name": "rhdp",
-  "version": "2.0.5",
+  "version": "3.0.0",
   "description": "RHDP - React Hook Datepicker. A React Hook based primitive to build simple, flexible datepicker components that are WAI-ARIA compliant, and support localization.",
   "author": "Roy Pearce <rhdp@roypearce.us> (github.com/roypearce)",
   "repository": "git@github.com:roypearce/rhdp.git",
@@ -14,6 +14,7 @@
     "calendar",
     "wai-aria",
     "accessibility",
+    "a11y",
     "range datepicker",
     "blocked dates",
     "multiple dates"
@@ -58,6 +59,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@rollup/plugin-typescript": "^8.3.0",
     "@size-limit/preset-small-lib": "^7.0.4",
+    "@storybook/addon-a11y": "^6.4.10",
     "@storybook/addon-essentials": "^6.4.9",
     "@storybook/addons": "^6.4.9",
     "@storybook/react": "^6.4.9",

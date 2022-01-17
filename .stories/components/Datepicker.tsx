@@ -28,6 +28,7 @@ const Datepicker = ({
     displayYear,
     focusedDate,
     getCalendarContainerProps,
+    getCalendarDayContainerProps,
     getCalendarWeekContainerProps,
     getDayOfTheWeekProps,
     getDaysOfTheWeekContainerProps,
@@ -132,10 +133,11 @@ const Datepicker = ({
                 key={`week-${weekIndex}`}
                 {...getCalendarWeekContainerProps()}
               >
-                {week.map((day) => {
+                {week.map((day, index) => {
                   return (
-                    <button
-                      className={`button-reset day-container 
+                    <div key={`day-cell-${index}`} {...getCalendarDayContainerProps()}>
+                      <button
+                        className={`button-reset day-container 
                         ${today === day.formatted ? 'day-today' || '' : ''}
                         ${day.inMonth ? 'day-in-month' : 'day-out-of-month' || ''}
                         ${day.blocked ? 'day-blocked' || '' : ''} 
@@ -145,12 +147,13 @@ const Datepicker = ({
                         ${day.rangeEnd ? 'day-in-range-end' || '' : ''}   
                         ${day.rangeStart ? 'day-in-range-start' || '' : ''}   
                       `}
-                      data-testid={`btn-day-${day.formatted}`}
-                      type="button"
-                      {...getDayButtonProps(day)}
-                    >
-                      <div className="day-content">{day.displayText}</div>
-                    </button>
+                        data-testid={`btn-day-${day.formatted}`}
+                        type="button"
+                        {...getDayButtonProps(day)}
+                      >
+                        <div className="day-content">{day.displayText}</div>
+                      </button>
+                    </div>
                   );
                 })}
               </div>

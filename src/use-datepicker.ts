@@ -446,6 +446,12 @@ export const useDatepicker = ({
     };
   };
 
+  const getCalendarDayContainerProps = () => {
+    return {
+      role: 'gridcell',
+    };
+  };
+
   const getCalendarWeekContainerProps = () => {
     return {
       role: 'row',
@@ -525,7 +531,7 @@ export const useDatepicker = ({
         day.today ? internalLabels.current.today : ''
       } ${isDaySelected(day) ? internalLabels.current.dateSelected : ''}`,
       'aria-describedby': `${id}-month-year-label`,
-      ...(isDaySelected(day) && { 'aria-selected': true }),
+      'aria-pressed': isDaySelected(day),
       ...(!(day.formatted === focusedDate || day.formatted === lastFocusedDate) && isDisabled && { disabled: true }),
       id: day.formatted,
       key: day.formatted,
@@ -546,7 +552,6 @@ export const useDatepicker = ({
       onMouseOver: () => {
         setHoveredDate(day.formatted);
       },
-      role: 'gridcell',
       tabIndex: getTabIndexForDay(day),
       type: 'button',
     };
@@ -854,6 +859,7 @@ export const useDatepicker = ({
     displayYear: internalState.displayYear,
     focusedDate: internalRef.current.focusedDate,
     getCalendarContainerProps,
+    getCalendarDayContainerProps,
     getCalendarWeekContainerProps,
     getDayOfTheWeekProps,
     getDaysOfTheWeekContainerProps,

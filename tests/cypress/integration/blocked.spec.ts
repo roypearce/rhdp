@@ -23,7 +23,7 @@ describe('Blocked dates', () => {
 
   it('should not allow blocked dates to be selected', () => {
     cy.getId('btn-day-2021-11-01').realClick();
-    cy.getId('btn-day-2021-11-01').should('not.have.attr', 'aria-selected', 'true');
+    cy.getId('btn-day-2021-11-01').should('have.attr', 'aria-pressed', 'false');
     cy.getId('div-dates-selected').should('have.text', '2021-11-09');
   });
 
@@ -49,7 +49,7 @@ describe('Blocked dates', () => {
 
   it('should allow unspecified dates to be selected', () => {
     cy.getId('btn-day-2021-11-04').realClick();
-    cy.getId('btn-day-2021-11-04').should('have.attr', 'aria-selected', 'true');
+    cy.getId('btn-day-2021-11-04').should('have.attr', 'aria-pressed', 'true');
     cy.getId('div-dates-selected').should('have.text', '2021-11-04');
   });
 });

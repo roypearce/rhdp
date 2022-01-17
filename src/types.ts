@@ -107,6 +107,9 @@ export interface UseDatepicker {
     onBlur(evt: any): void;
     onFocus(): void;
   };
+  getCalendarDayContainerProps(): {
+    [key: string]: string;
+  };
   getCalendarWeekContainerProps(): {
     [key: string]: string;
   };
