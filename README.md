@@ -108,6 +108,10 @@ If the datepicker is going to be contained in a popover, `focusOnInit`, `hasFocu
 
 [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat) is used to automatically localize the days of the week and the months of the year for display if the `locale` prop is passed [with a valid locale](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#using_locales). There are labels that can be passed in for various elements which are used by screen readers, and by default English values are supplied, but for other languages, the labels will need to be supplied by your localization system.
 
+## Bundling
+
+If your target project is bundled with Webpack, it should use Webpack 5 for proper support of modern `Class` syntax.
+
 ## Installation
 
 - `yarn add rhdp` or `npm install --save rhdp`
