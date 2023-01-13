@@ -1,3 +1,4 @@
+.DS_Store
 node_modules
 storybook-static
 .nyc_output
@@ -5,3 +6,4 @@ coverage-combined
 coverage
 coverage-json
 instrumented
+tests/cypress/screenshots
