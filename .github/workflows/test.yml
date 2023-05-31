@@ -18,18 +18,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup
-        run: yarn install
+        run: yarn
       - name: Creates static storybook test site
-        run: yarn run storybook:build
+        run: yarn storybook:build
       - name: Static server for storybook site
         run: node --experimental-json-modules static-storybook-server.mjs &
         env:
           PORT: 6006
       - name: Lint
-        run: yarn run lint
+        run: yarn lint
       - name: Unit tests
-        run: yarn run test:unit
+        run: yarn test:unit
       - name: E2E tests
-        run: yarn run test:e2e-headless
+        run: yarn test:e2e-headless
       - name: Size Check
-        run: yarn run build && yarn run size
+        run: yarn build && yarn size
