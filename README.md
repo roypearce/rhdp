@@ -4,11 +4,9 @@
 
 A React Hook based primitive to build simple, flexible datepicker components that are WAI-ARIA compliant, and support localization.
 
-<img src="https://badge.fury.io/js/rhdp.svg" alt="rhdp npm version" />
+<img src="https://img.shields.io/npm/v/rhdp?color=brightgreen" alt="rhdp npm version" />
 <img src="https://img.shields.io/nycrc/roypearce/rhdp?config=nyc-total.json&label=code%20coverage&preferredThreshold=lines" alt="code coverage" />
-<img src="https://img.badgesize.io/roypearce/rhdp/main/dist/module.js.svg?compression=brotli&label=module size (brotli)"/>
-<img src="https://img.badgesize.io/roypearce/rhdp/main/dist/module.js.svg?compression=gzip&label=module size (gzip)"/>
-<img src="https://img.badgesize.io/roypearce/rhdp/main/dist/module.js.svg?label=module size (uncompressed)"/>
+<img src="https://img.shields.io/bundlephobia/minzip/rhdp" alt="rhdp minified size" />
 
 ## The Problem
 
@@ -135,8 +133,8 @@ If your target project is bundled with Webpack, it should use Webpack 5 for prop
 ```
 git clone git@github.com:roypearce/rhdp.git
 cd rhdp
-yarn install
-yarn run storybook
+yarn
+yarn storybook
 ```
 
 ### npm
