@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './components/datepicker.css';
 import Datepicker from './components/Datepicker';
 import { isDateValid } from '../src/util';
 import { SelectedDates } from '../src/types';

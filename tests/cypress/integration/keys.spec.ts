@@ -74,6 +74,7 @@ describe('Key based navigation', () => {
   describe('Home navigation', () => {
     it('should go to the start of the month when Home is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-08').should('have.focus');
       cy.realPress('Home');
@@ -82,6 +83,7 @@ describe('Key based navigation', () => {
 
     it('should go to next best date if the start of the month is blocked', () => {
       cy.visitStory('tests--blocked-dates');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-09').should('have.focus');
       cy.realPress('Home');
@@ -92,6 +94,7 @@ describe('Key based navigation', () => {
   describe('End navigation', () => {
     it('should go to the end of the month when End is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-08').should('have.focus');
       cy.realPress('End');
@@ -100,6 +103,7 @@ describe('Key based navigation', () => {
 
     it('should go to next best date if the end of the month is blocked', () => {
       cy.visitStory('tests--blocked-dates');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-09').should('have.focus');
       cy.realPress('End');
@@ -110,6 +114,7 @@ describe('Key based navigation', () => {
   describe('PageUp navigation', () => {
     it('should go to the same date in the previous month when PageUp is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-08').should('have.focus');
       cy.realPress('PageUp');
@@ -118,6 +123,7 @@ describe('Key based navigation', () => {
 
     it('should go to the same date in the previous year when Ctrl+PageUp is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-08').should('have.focus');
       cy.realPress(['Control', 'PageUp']);
@@ -126,6 +132,7 @@ describe('Key based navigation', () => {
 
     it('should focus on the disabled date in the previous month when PageUp is pressed, arrow keys in any direction should focus the closest available date', () => {
       cy.visitStory('tests--blocked-dates');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-09').should('have.focus');
       cy.realPress('PageUp');
@@ -136,6 +143,7 @@ describe('Key based navigation', () => {
 
     it('should focus on the disabled date in the previous year when Ctrl+PageUp is pressed, arrow keys in any direction should focus the closest available date', () => {
       cy.visitStory('tests--blocked-dates');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-09').should('have.focus');
       cy.realPress(['Control', 'PageUp']);
@@ -148,6 +156,7 @@ describe('Key based navigation', () => {
   describe('PageDown navigation', () => {
     it('should go to the same date in the next month when PageDown is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-08').should('have.focus');
       cy.realPress('PageDown');
@@ -156,6 +165,7 @@ describe('Key based navigation', () => {
 
     it('should go to the same date in the next year when Ctrl+PageDown is pressed', () => {
       cy.visitStory('tests--single-date-preselected');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-08').should('have.focus');
       cy.realPress(['Control', 'PageDown']);
@@ -164,6 +174,7 @@ describe('Key based navigation', () => {
 
     it('should focus on the disabled date in the next month is blocked when PageDown is pressed, should go to next best date when arrow keys are used', () => {
       cy.visitStory('tests--blocked-dates');
+      cy.getId('btn-focus-start').should('have.focus');
       cy.realPress('Tab');
       cy.getId('btn-day-2021-11-09').should('have.focus');
       cy.getId('btn-next-month').click().click();
