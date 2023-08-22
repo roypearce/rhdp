@@ -73,7 +73,7 @@ export enum RenderType {
   User,
 }
 
-export type SelectedDates = string | string[] | undefined | null;
+export type SelectedDates = string | string[] | null | undefined;
 
 export interface UseDatepickerProps {
   blockedDates?: SelectedDates;
