@@ -775,6 +775,7 @@ export const useDatepicker = ({
           pageUpTimePeriod = TimePeriod.Year;
         }
         newFocusedDate = new ChainDate(dateToFocus).add(-1, pageUpTimePeriod, true).format();
+        // check if the minDate and newFocusedDate are in the same year/month e.g 2023-07
         if (minDate && newFocusedDate.substring(0, 7) === minDate.substring(0, 7) && minDate > newFocusedDate) {
           newFocusedDate = findBestDateToFocus(
             new ChainDate(dateToFocus).add(-1, pageUpTimePeriod, true).format(),
@@ -791,6 +792,7 @@ export const useDatepicker = ({
           pageDownTimePeriod = TimePeriod.Year;
         }
         newFocusedDate = new ChainDate(dateToFocus).add(1, pageDownTimePeriod, true).format();
+        // check if the maxDate and newFocusedDate are in the same year/month e.g 2023-07
         if (maxDate && newFocusedDate.substring(0, 7) === maxDate.substring(0, 7) && maxDate < newFocusedDate) {
           newFocusedDate = findBestDateToFocus(
             new ChainDate(dateToFocus).add(1, pageDownTimePeriod, true).format(),
