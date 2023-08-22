@@ -344,7 +344,21 @@ export const useDatepicker = ({
     return formattedDate in internalRef.current.selectedDatesMap;
   };
 
-  const findBestDateToFocus = (startDate: string, searchDirection: SearchDirection, testStartDate = false): string => {
+  /**
+   * Will locate the closest focusable date based on direction of traversal across the calendar from the start date and takes into account the disabled, blocked, min, max dates
+   *
+   * @param startDate - string in YYYY-MM-DD format, the date which we'd like to focus on, and will start searching from for the nearest match that can be focused
+   * @param searchDirection - SearchDirection, left right up or down, depends on which arrow key is pressed for the direction to find a potential date to focus
+   * @param testStartDate - boolean, defaults to false, whether or not the startDate should be tested, if true and it can be selected this will be returned
+   * @param alsoTestReverseDirection - boolean, defaults to false, will search both directions looking for an ideal match
+   * @returns string in YYYY-MM-DD format
+   */
+  const findBestDateToFocus = (
+    startDate: string,
+    searchDirection: SearchDirection,
+    testStartDate = false,
+    alsoTestReverseDirection = false,
+  ): string => {
     let maxSearchDate = maxDate
       ? new ChainDate(maxDate).add(1, TimePeriod.Week).format()
       : new ChainDate(startDate).add(6, TimePeriod.Week).format();
@@ -352,7 +366,6 @@ export const useDatepicker = ({
       ? new ChainDate(minDate).add(-1, TimePeriod.Week).format()
       : new ChainDate(startDate).add(-6, TimePeriod.Week).format();
     let bestDateToFocus = '';
-    let possibleDateToFocus = new ChainDate(startDate);
 
     internalRef.current.selectedDates.forEach((date) => {
       if (date < minSearchDate) {
@@ -367,6 +380,14 @@ export const useDatepicker = ({
         return startDate;
       }
     }
+
+    if (startDate < minSearchDate) {
+      startDate = minSearchDate;
+    } else if (startDate > maxSearchDate) {
+      startDate = maxSearchDate;
+    }
+
+    let possibleDateToFocus = new ChainDate(startDate);
 
     let dayDirection = 1;
     let weekDirection = 1;
@@ -388,6 +409,13 @@ export const useDatepicker = ({
         }
         if (isDateSelectable(currentDateToTest, minSearchDate, maxSearchDate)) {
           bestDateToFocus = currentDateToTest;
+        } else if (alsoTestReverseDirection) {
+          return findBestDateToFocus(
+            startDate,
+            searchDirection === SearchDirection.Left ? SearchDirection.Right : SearchDirection.Left,
+            testStartDate,
+            false,
+          );
         }
         break;
       case SearchDirection.Up:
@@ -740,22 +768,36 @@ export const useDatepicker = ({
           true,
         );
         break;
+      // PageUp is also used by the previous month button
       case 'PageUp':
+        let pageUpTimePeriod = TimePeriod.Month;
         if (evt.ctrlKey) {
-          // same date in the previous year
-          newFocusedDate = new ChainDate(dateToFocus).add(-1, TimePeriod.Year, true).format();
-        } else {
-          // same date in the previous month
-          newFocusedDate = new ChainDate(dateToFocus).add(-1, TimePeriod.Month, true).format();
+          pageUpTimePeriod = TimePeriod.Year;
+        }
+        newFocusedDate = new ChainDate(dateToFocus).add(-1, pageUpTimePeriod, true).format();
+        if (minDate && newFocusedDate.substring(0, 7) === minDate.substring(0, 7) && minDate > newFocusedDate) {
+          newFocusedDate = findBestDateToFocus(
+            new ChainDate(dateToFocus).add(-1, pageUpTimePeriod, true).format(),
+            SearchDirection.Left,
+            true,
+            true,
+          );
         }
         break;
+      // PageDown is also used by the next month button
       case 'PageDown':
+        let pageDownTimePeriod = TimePeriod.Month;
         if (evt.ctrlKey) {
-          // same date in the next year
-          newFocusedDate = new ChainDate(dateToFocus).add(1, TimePeriod.Year, true).format();
-        } else {
-          // same date in the next month
-          newFocusedDate = new ChainDate(dateToFocus).add(1, TimePeriod.Month, true).format();
+          pageDownTimePeriod = TimePeriod.Year;
+        }
+        newFocusedDate = new ChainDate(dateToFocus).add(1, pageDownTimePeriod, true).format();
+        if (maxDate && newFocusedDate.substring(0, 7) === maxDate.substring(0, 7) && maxDate < newFocusedDate) {
+          newFocusedDate = findBestDateToFocus(
+            new ChainDate(dateToFocus).add(1, pageDownTimePeriod, true).format(),
+            SearchDirection.Right,
+            true,
+            true,
+          );
         }
         break;
       case 'Tab':
@@ -811,7 +853,7 @@ export const useDatepicker = ({
     if (onChange) {
       let returnValue = newDates;
       if (mode === 'single') {
-        returnValue = newDates.length ? newDates[0] : '';
+        returnValue = newDates?.length ? newDates[0] : '';
       }
       onChange(returnValue);
     }

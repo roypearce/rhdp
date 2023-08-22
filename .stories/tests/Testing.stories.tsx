@@ -4,6 +4,7 @@ import { isDateValid } from '../../src/util';
 import Datepicker from '../components/Datepicker';
 import BrokenDatepicker from '../components/BrokenDatepicker';
 import ChainDate, { TimePeriod } from '../../src/chain-date';
+import React from 'react';
 
 export default {
   title: 'Tests',
@@ -147,8 +148,8 @@ export const BlockedDates = () => {
   ]);
   const initialDate = new ChainDate('2021-11-09');
   const sixWeeks = 42;
-  const forwardDates = useRef([]);
-  const backDates = useRef([]);
+  const forwardDates = useRef<string[]>([]);
+  const backDates = useRef<string[]>([]);
 
   useEffect(() => {
     for (let i = 1; i <= sixWeeks; i += 1) {
@@ -164,8 +165,8 @@ export const BlockedDates = () => {
   }, []);
 
   const [selectDates, setSelectDates] = useState<SelectedDates>(initialDate.format());
-  const [maxDate, setMaxDate] = useState('2022-02-13');
-  const [minDate, setMinDate] = useState(null);
+  const [maxDate, setMaxDate] = useState<null | string>('2022-02-13');
+  const [minDate, setMinDate] = useState<null | string>(null);
   const [mode, setMode] = useState<DateSelectionMode>('single');
 
   const additionalControls = (
@@ -325,6 +326,13 @@ export const MaxDate = () => {
 
   const additionalControls = (
     <>
+    <button
+      className="btn btn-primary mr-1 my-1"
+      data-testid="btn-set-max-date-2021-12-01"
+      onClick={() => setMaxDate('2021-12-01')}
+    >
+      Set maxDate to 2021-12-01
+    </button>
       <button
         className="btn btn-primary mr-1 my-1"
         data-testid="btn-set-max-date-2022-01-08"
@@ -370,6 +378,20 @@ export const MinDate = () => {
 
   const additionalControls = (
     <>
+    <button
+      className="btn btn-primary mr-1 my-1"
+      data-testid="btn-set-min-date-2021-11-01"
+      onClick={() => setMinDate('2021-11-01')}
+    >
+      Set minDate to 2021-11-01
+    </button>
+    <button
+      className="btn btn-primary mr-1 my-1"
+      data-testid="btn-set-min-date-2021-11-30"
+      onClick={() => setMinDate('2021-11-30')}
+    >
+      Set minDate to 2021-11-30
+    </button>
       <button
         className="btn btn-primary mr-1 my-1"
         data-testid="btn-set-min-date-2021-08-08"
@@ -435,7 +457,7 @@ export const MinMaxDate = () => {
 };
 
 export const MultipleDatePreselected = () => {
-  const selectDates = ['2021-11-01', '2021-11-10', '2021-11-15', , '2021-11-25'];
+  const selectDates = ['2021-11-01', '2021-11-10', '2021-11-15', '2021-11-25'];
   const [datesSelected, setDatesSelected] = useState<SelectedDates>(selectDates);
 
   return (
@@ -642,14 +664,14 @@ export const SingleDatePreselected = () => {
       <button
         className="btn btn-primary mr-1 my-1"
         data-testid="btn-set-month-february"
-        onClick={() => datepickerMethods.current.setMonth(2)}
+        onClick={() => datepickerMethods.current?.setMonth(2)}
       >
         Set Month to February
       </button>
       <button
         className="btn btn-primary mr-1 my-1"
         data-testid="btn-set-year-2024"
-        onClick={() => datepickerMethods.current.setYear(2024)}
+        onClick={() => datepickerMethods.current?.setYear(2024)}
       >
         Set Year to 2024
       </button>

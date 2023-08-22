@@ -9,7 +9,10 @@ export const convertToStringArray = (maybeArray: SelectedDates): string[] => {
   if (Array.isArray(maybeArray)) {
     return maybeArray;
   }
-  return [maybeArray];
+  if (maybeArray) {
+    return [maybeArray];
+  }
+  return [];
 };
 
 export const formatDayOfTheWeek = (locale: string, date: Date, format: 'long' | 'short' | 'narrow' | undefined) => {
@@ -67,8 +70,11 @@ export function getUniqueId(prefix = 'rhdp-id-') {
   return `${prefix}${(uniqueId += 1)}`;
 }
 
-export const isDateValid = (date: string): boolean => {
+export const isDateValid = (date?: string | null): boolean => {
   try {
+    if (!date) {
+      return false;
+    }
     const [year, month, day] = date.match(/\d+/g) || ['', '', ''];
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/u;
     const jsDate = new Date(`${prependZeroes(month, 2)}/${prependZeroes(day, 2)}/${year}`);

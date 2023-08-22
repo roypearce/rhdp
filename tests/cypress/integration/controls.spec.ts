@@ -97,9 +97,36 @@ describe('Previous month controls', () => {
     cy.getId('btn-day-2021-11-01').should('have.attr', 'aria-pressed', 'true');
     cy.getId('btn-previous-month').should('be.disabled');
   });
+
+  it('should allow clicking to the previous month if the min date is the last day of the month and they have already clicked into the next month', () => {
+    cy.visitStory('tests--min-date');
+    cy.getId('btn-day-2021-11-06').should('be.disabled');
+    cy.getId('btn-day-2021-11-07').should('not.be.disabled');
+    cy.getId('btn-set-min-date-2021-11-30').realClick();
+    cy.getId('btn-day-2021-11-30').should('not.be.disabled').realClick();
+    cy.getId('btn-day-2021-11-29').should('be.disabled');
+    cy.getId('div-month-year-title').contains('November 2021');
+    cy.getId('btn-next-month').realClick();
+    cy.getId('div-month-year-title').contains('December 2021');
+    cy.getId('btn-day-2021-12-01').realClick();
+    cy.getId('btn-previous-month').should('not.be.disabled').realClick();
+    cy.getId('div-month-year-title').contains('November 2021');
+    cy.getId('btn-day-2021-11-30').should('not.be.disabled');
+    cy.getId('btn-day-2021-11-29').should('be.disabled');
+  });
 });
 
 describe('Next month controls', () => {
+  it('should allow clicking to the next month if the max date is the first day of the month and the selected date in the current month is disabled in the next month', () => {
+    cy.visitStory('tests--max-date');
+    cy.getId('btn-set-max-date-2021-12-01').realClick();
+    cy.getId('btn-day-2021-11-02').should('not.be.disabled').realClick();
+    cy.getId('btn-day-2021-12-02').should('be.disabled');
+    cy.getId('div-month-year-title').contains('November 2021');
+    cy.getId('btn-next-month').realClick();
+    cy.getId('div-month-year-title').contains('December 2021');
+  });
+
   it('should go to the right month one month forward', () => {
     cy.visitStory('tests--single-date-preselected');
     cy.getId('div-month-year-title').contains('November 2021');
@@ -147,14 +174,23 @@ describe('Next month controls', () => {
 });
 
 describe('Controls when max multiple dates are all selected', () => {
-  it('should disable all month and year controls when all dates are selected in the same month', () => {
+  beforeEach(() => {
     cy.visitStory('tests--single-date-preselected');
+  });
+
+  const setTestConditions = () => {
+    cy.getId('btn-set-mode-max-3').click();
+    cy.getId('btn-set-select-dates-multiple').click();
+  };
+
+  it('should disable all month and year controls when all dates are selected in the same month', () => {
     cy.getId('btn-previous-month').should('not.be.disabled');
     cy.getId('btn-previous-year').should('not.be.disabled');
     cy.getId('btn-next-month').should('not.be.disabled');
     cy.getId('btn-next-year').should('not.be.disabled');
-    cy.getId('btn-set-mode-max-3').click();
-    cy.getId('btn-set-select-dates-multiple').click();
+
+    setTestConditions();
+
     cy.getId('btn-day-2021-11-01').should('be.visible');
     cy.getId('btn-previous-month').should('be.disabled');
     cy.getId('btn-previous-year').should('be.disabled');
@@ -163,6 +199,8 @@ describe('Controls when max multiple dates are all selected', () => {
   });
 
   it('should enable all controls when max multiple is not maxed out', () => {
+    setTestConditions();
+
     cy.getId('btn-day-2021-11-30')
       .should('have.attr', 'aria-pressed', 'true')
       .click()
@@ -174,6 +212,13 @@ describe('Controls when max multiple dates are all selected', () => {
   });
 
   it('should allow navigation between two consecutive months when selected dates are in both months', () => {
+    setTestConditions();
+
+    cy.getId('btn-day-2021-11-30')
+      .should('have.attr', 'aria-pressed', 'true')
+      .click()
+      .should('have.attr', 'aria-pressed', 'false');
+
     cy.getId('btn-day-2021-12-01').click();
     cy.getId('div-month-year-title').should('have.text', 'December 2021');
     cy.getId('btn-previous-month').should('not.be.disabled');
@@ -188,10 +233,18 @@ describe('Controls when max multiple dates are all selected', () => {
     cy.getId('btn-next-year').should('be.disabled');
     cy.getId('btn-next-month').click();
     cy.getId('div-month-year-title').should('have.text', 'December 2021');
+    cy.getId('btn-day-2021-12-01').should('have.attr', 'aria-pressed', 'true');
   });
 
   it('should allow navigation between two consecutive years when selected dates are in both years', () => {
-    cy.getId('btn-day-2021-12-01').should('have.attr', 'aria-pressed', 'true').click();
+    setTestConditions();
+
+    cy.getId('btn-day-2021-11-30')
+      .should('have.attr', 'aria-pressed', 'true')
+      .click()
+      .should('have.attr', 'aria-pressed', 'false');
+
+    cy.getId('btn-next-month').click();
     cy.getId('btn-next-year').click();
     cy.getId('div-month-year-title').should('have.text', 'December 2022');
     cy.getId('btn-day-2022-12-01').click();
@@ -200,16 +253,31 @@ describe('Controls when max multiple dates are all selected', () => {
     cy.getId('btn-next-month').should('be.disabled');
     cy.getId('btn-next-year').should('be.disabled');
     cy.getId('btn-previous-year').click();
-    cy.getId('div-month-year-title').should('have.text', 'December 2021');
-    cy.getId('btn-previous-month').should('not.be.disabled');
+    cy.getId('btn-previous-month').click();
+    cy.getId('div-month-year-title').should('have.text', 'November 2021');
+    cy.getId('btn-previous-month').should('be.disabled');
     cy.getId('btn-previous-year').should('be.disabled');
     cy.getId('btn-next-month').should('not.be.disabled');
     cy.getId('btn-next-year').should('not.be.disabled');
     cy.getId('btn-next-year').click();
+    cy.getId('div-month-year-title').should('have.text', 'November 2022');
+    cy.getId('btn-next-month').click();
     cy.getId('div-month-year-title').should('have.text', 'December 2022');
   });
 
   it('should allow navigation between all months between the range of selected dates', () => {
+    setTestConditions();
+
+    cy.getId('btn-day-2021-11-30')
+      .should('have.attr', 'aria-pressed', 'true')
+      .click()
+      .should('have.attr', 'aria-pressed', 'false');
+
+    cy.getId('btn-next-year').click();
+    cy.getId('btn-next-month').click();
+    cy.getId('div-month-year-title').should('have.text', 'December 2022');
+    cy.getId('btn-day-2022-12-01').click();
+
     cy.getId('btn-previous-month').click();
     cy.getId('div-month-year-title').should('have.text', 'November 2022');
     cy.getId('btn-previous-month').click();

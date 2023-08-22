@@ -18,7 +18,9 @@ export interface CalendarDay {
 
 export type DatesMap = { [key: string]: null };
 
-export type DatepickerMethodsRef = MutableRefObject<{ setMonth(month: number): void; setYear(year: number): void }>;
+export type DatepickerMethodsRef = MutableRefObject<
+  { setMonth(month: number): void; setYear(year: number): void } | undefined
+>;
 
 export type DateSelectionMode = 'single' | 'range' | 'multiple' | number;
 
@@ -71,7 +73,7 @@ export enum RenderType {
   User,
 }
 
-export type SelectedDates = string | string[];
+export type SelectedDates = string | string[] | undefined | null;
 
 export interface UseDatepickerProps {
   blockedDates?: SelectedDates;
@@ -87,8 +89,8 @@ export interface UseDatepickerProps {
     today?: string;
   };
   locale?: string;
-  maxDate?: string;
-  minDate?: string;
+  maxDate?: string | null | undefined;
+  minDate?: string | null | undefined;
   mode?: DateSelectionMode;
   onChange?(newDates: SelectedDates): void;
   onClose?(): void;
