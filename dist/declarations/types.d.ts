@@ -20,7 +20,7 @@ export type DatesMap = {
 export type DatepickerMethodsRef = MutableRefObject<{
     setMonth(month: number): void;
     setYear(year: number): void;
-}>;
+} | undefined>;
 export type DateSelectionMode = 'single' | 'range' | 'multiple' | number;
 export declare enum SearchDirection {
     Down = 0,
@@ -70,7 +70,7 @@ export declare enum RenderType {
     Programmatic = 1,
     User = 2
 }
-export type SelectedDates = string | string[];
+export type SelectedDates = string | string[] | null | undefined;
 export interface UseDatepickerProps {
     blockedDates?: SelectedDates;
     focusOnInit?: boolean;
@@ -85,8 +85,8 @@ export interface UseDatepickerProps {
         today?: string;
     };
     locale?: string;
-    maxDate?: string;
-    minDate?: string;
+    maxDate?: string | null | undefined;
+    minDate?: string | null | undefined;
     mode?: DateSelectionMode;
     onChange?(newDates: SelectedDates): void;
     onClose?(): void;

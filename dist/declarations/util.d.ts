@@ -31,5 +31,5 @@ export declare const getNewDisplayTimePeriods: (newTimePeriod: string) => {
 };
 export declare const getFocusableElements: (currentQuerySelector: HTMLElement | null) => Element[];
 export declare function getUniqueId(prefix?: string): string;
-export declare const isDateValid: (date: string) => boolean;
+export declare const isDateValid: (date?: string | null) => boolean;
 export declare const prependZeroes: (value: string, length: number) => string;
