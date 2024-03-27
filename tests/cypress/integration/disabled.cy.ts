@@ -85,9 +85,8 @@ describe('Disabed dates', () => {
       cy.getId('btn-day-2021-11-04').should('be.disabled');
       cy.getId('btn-day-2021-11-05').should('be.disabled');
       cy.getId('btn-day-2021-11-06').should('be.disabled');
-    });
 
-    it('should not disable all dates on and after the specified minDate', () => {
+      // should not disable all dates on and after the specified minDate
       cy.getId('btn-day-2021-11-07').should('not.be.disabled');
       cy.getId('btn-day-2021-11-08').should('not.be.disabled');
       cy.getId('btn-day-2021-11-09').should('not.be.disabled');
@@ -220,9 +219,8 @@ describe('Disabed dates', () => {
       cy.getId('btn-day-2021-11-26').should('not.be.disabled');
       cy.getId('btn-day-2021-11-27').should('not.be.disabled');
       cy.getId('btn-day-2021-11-28').should('not.be.disabled');
-    });
 
-    it('should not allow disabled dates to be selected with minDate and maxDate set', () => {
+      // should not allow disabled dates to be selected with minDate and maxDate set
       cy.getId('btn-day-2021-11-06').realClick();
       cy.getId('btn-day-2021-11-06').should('have.attr', 'aria-pressed', 'false');
       cy.getId('div-dates-selected').should('have.text', '2021-11-08');
