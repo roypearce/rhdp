@@ -80,9 +80,8 @@ describe('selectDates prop modified after initial render', () => {
       cy.getId('div-dates-selected').should('have.text', '');
       cy.getId('btn-set-select-dates-string').click();
       cy.getId('div-dates-selected').should('have.text', '2021-11-29');
-    });
 
-    it('should allow the select dates to be modified back to null', () => {
+      // should allow the select dates to be modified back to null
       cy.getId('btn-set-select-dates-null').click();
       cy.getId('div-dates-selected').should('have.text', '');
     });
@@ -95,15 +94,13 @@ describe('selectDates prop modified after initial render', () => {
       cy.getId('btn-set-mode-range').click();
       cy.getId('btn-set-select-dates-range').click();
       cy.getId('div-dates-selected').should('have.text', '2021-11-20,2021-11-26');
-    });
 
-    it('should let a new range of dates be selected when a current range already exists', () => {
+      // should let a new range of dates be selected when a current range already exists
       cy.getId('btn-day-2021-11-10').click();
       cy.getId('btn-day-2021-11-11').click();
       cy.getId('div-dates-selected').should('have.text', '2021-11-10,2021-11-11');
-    });
 
-    it('should allow the select dates to be modified back to null', () => {
+      // should allow the select dates to be modified back to null
       cy.getId('btn-set-select-dates-null').click();
       cy.getId('div-dates-selected').should('have.text', '');
     });
@@ -116,9 +113,8 @@ describe('selectDates prop modified after initial render', () => {
       cy.getId('btn-set-mode-multiple').click();
       cy.getId('btn-set-select-dates-multiple').click();
       cy.getId('div-dates-selected').should('have.text', '2021-11-10,2021-11-20,2021-11-30');
-    });
 
-    it('should allow the select dates to be modified back to null', () => {
+      // should allow the select dates to be modified back to null
       cy.getId('btn-set-select-dates-null').click();
       cy.getId('div-dates-selected').should('have.text', '');
     });
@@ -132,9 +128,8 @@ describe('selectDates prop modified after initial render', () => {
       cy.getId('btn-set-select-dates-multiple').click();
       cy.getId('div-month-year-title').should('have.text', 'November 2021');
       cy.getId('div-dates-selected').should('have.text', '2021-11-10,2021-11-20,2021-11-30');
-    });
 
-    it('should allow the select dates to be modified back to null', () => {
+      // should allow the select dates to be modified back to null
       cy.getId('btn-set-select-dates-null').click();
       cy.getId('div-dates-selected').should('have.text', '');
     });
@@ -243,9 +238,8 @@ describe('mode prop changing after initial render', () => {
       cy.getId('btn-set-mode-range').click();
       cy.getId('btn-day-2021-11-11').click();
       cy.getId('div-dates-selected').should('have.text', '2021-11-08,2021-11-11');
-    });
 
-    it('should drop the second selection if mode is switched back to single from range', () => {
+      // should drop the second selection if mode is switched back to single from range
       cy.getId('btn-set-mode-single').click();
       cy.getId('div-dates-selected').should('have.text', '2021-11-08');
     });
@@ -264,9 +258,8 @@ describe('mode prop changing after initial render', () => {
       cy.realPress('ArrowRight');
       cy.realPress('Enter');
       cy.getId('div-dates-selected').should('have.text', '2021-11-08,2021-11-09,2021-11-11');
-    });
 
-    it('should drop the other selections if mode is switched to range from multiple', () => {
+      // should drop the other selections if mode is switched to range from multiple
       cy.getId('btn-set-mode-range').click();
       cy.getId('div-dates-selected').should('have.text', '2021-11-08,2021-11-09');
     });
@@ -287,9 +280,8 @@ describe('mode prop changing after initial render', () => {
       cy.getId('div-dates-selected').should('have.text', '2021-11-08,2021-11-09,2021-11-11');
       // all other dates should now be disabled because it is a max 3 selection
       cy.getId('btn-day-2021-11-01').should('be.disabled');
-    });
 
-    it('should drop the other selections if mode is switched back to single from max multiple', () => {
+      // should drop the other selections if mode is switched back to single from max multiple
       cy.getId('btn-set-mode-single').click();
       cy.getId('div-dates-selected').should('have.text', '2021-11-08');
       cy.getId('btn-day-2021-11-01').should('not.be.disabled');

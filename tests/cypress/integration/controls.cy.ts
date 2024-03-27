@@ -19,9 +19,8 @@ describe('Close button control', () => {
     cy.getId('btn-close').should('have.focus');
     cy.realPress('Enter');
     cy.getId('btn-close').should('not.exist');
-  });
 
-  it('should not change the value when closed with the Enter key', () => {
+    // should not change the value when closed with the Enter key
     cy.getId('btn-open-datepicker').click();
     cy.getId('btn-close').should('be.visible');
     cy.getId('btn-day-2022-02-02').should('have.attr', 'aria-pressed', 'true');
@@ -40,9 +39,8 @@ describe('Previous year controls', () => {
     cy.getId('div-month-year-title').contains('November 2018');
     cy.getId('btn-previous-year').click();
     cy.getId('div-month-year-title').contains('November 2017');
-  });
 
-  it('should have the correct date focused when tabbing into the calendar', () => {
+    //should have the correct date focused when tabbing into the calendar
     cy.realPress('Tab');
     cy.realPress('Tab');
     cy.realPress('Tab');
@@ -63,9 +61,8 @@ describe('Next year controls', () => {
     cy.getId('div-month-year-title').contains('November 2024');
     cy.getId('btn-next-year').click();
     cy.getId('div-month-year-title').contains('November 2025');
-  });
 
-  it('should have the correct date focused when tabbing into the calendar', () => {
+    // should have the correct date focused when tabbing into the calendar
     cy.realPress('Tab');
     cy.getId('btn-day-2025-11-08').should('have.focus');
   });
@@ -83,9 +80,8 @@ describe('Previous month controls', () => {
     cy.getId('div-month-year-title').contains('August 2021');
     cy.getId('btn-previous-month').click();
     cy.getId('div-month-year-title').contains('July 2021');
-  });
 
-  it('should have the correct date focused when tabbing into the calendar', () => {
+    // should have the correct date focused when tabbing into the calendar
     cy.realPress('Tab');
     cy.realPress('Tab');
     cy.realPress('Tab');
@@ -138,9 +134,8 @@ describe('Next month controls', () => {
     cy.getId('div-month-year-title').contains('February 2022');
     cy.getId('btn-next-month').click();
     cy.getId('div-month-year-title').contains('March 2022');
-  });
 
-  it('should have the correct date focused when tabbing into the calendar', () => {
+    // should have the correct date focused when tabbing into the calendar
     cy.realPress('Tab');
     cy.realPress('Tab');
     cy.getId('btn-day-2022-03-08').should('have.focus');
@@ -154,9 +149,8 @@ describe('Next month controls', () => {
     cy.getId('btn-focus-start').click();
     cy.realPress('Tab');
     cy.getId('btn-day-2022-02-28').should('have.focus');
-  });
 
-  it('should let arrow navigation work from the new focused date as expected', () => {
+    // should let arrow navigation work from the new focused date as expected
     cy.realPress('ArrowUp');
     cy.getId('btn-day-2022-02-21').should('have.focus');
   });

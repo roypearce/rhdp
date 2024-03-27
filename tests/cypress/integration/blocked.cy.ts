@@ -1,6 +1,9 @@
 describe('Blocked dates', () => {
-  it('should block all dates specified from selection for the month of Nov 2021', () => {
+  beforeEach(() => {
     cy.visitStory('tests--blocked-dates');
+  });
+
+  it('should block all dates specified from selection for the month of Nov 2021', () => {
     cy.getId('btn-day-2021-11-01').should('be.disabled');
     cy.getId('btn-day-2021-11-02').should('be.disabled');
     cy.getId('btn-day-2021-11-07').should('be.disabled');

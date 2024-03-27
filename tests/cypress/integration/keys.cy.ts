@@ -13,9 +13,8 @@ describe('Key based navigation', () => {
       cy.getId('btn-day-2021-11-09').should('have.focus');
       cy.realPress('ArrowDown');
       cy.getId('btn-day-2021-11-09').should('have.focus');
-    });
 
-    it('should allow navigation backwards beyond 6 weeks if there is a selected date before that', () => {
+      // should allow navigation backwards beyond 6 weeks if there is a selected date before that
       cy.getId('btn-next-month').click();
       cy.realPress('Tab');
       cy.realPress('Tab');
@@ -26,9 +25,8 @@ describe('Key based navigation', () => {
       cy.getId('btn-day-2021-11-09').should('have.focus');
       cy.realPress('ArrowRight');
       cy.getId('btn-day-2021-11-09').should('have.focus');
-    });
 
-    it('should not allow navigation beyond 6 weeks if that date is no longer selected', () => {
+      // should not allow navigation beyond 6 weeks if that date is no longer selected
       cy.getId('btn-next-month').click();
       cy.realPress('Tab');
       cy.realPress('Tab');
@@ -39,9 +37,8 @@ describe('Key based navigation', () => {
       cy.getId('btn-day-2021-12-22').should('have.focus');
       cy.realPress('ArrowUp');
       cy.getId('btn-day-2021-12-22').should('have.focus');
-    });
 
-    it('should allow navigation forwards beyond 6 weeks if there is a selected date after that', () => {
+      // should allow navigation forwards beyond 6 weeks if there is a selected date after that
       cy.getId('btn-previous-month').click();
       cy.realPress('Tab');
       cy.realPress('Tab');
